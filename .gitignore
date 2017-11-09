@@ -1,5 +1,5 @@
 # custom
-bin
+bin/*
 
 # Prerequisites
 *.d
