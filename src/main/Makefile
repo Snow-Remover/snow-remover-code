@@ -5,6 +5,18 @@
 CURRENT_DIR       = $(shell basename $(CURDIR))
 MAKEFILE_DIR     := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
+ifeq ($(OS),Windows_NT)
+    CURRENT_OS = WINDOWS
+else
+    UNAME_S := $(shell uname -s)
+    ifeq ($(UNAME_S),Linux)
+        CURRENT_OS = LINUX
+    endif
+    ifeq ($(UNAME_S),Darwin)
+        CURRENT_OS = MAC
+    endif
+endif
+
 #ARDUINO_LIBS = Ethernet SPI
 
 ### PROJECT_DIR
@@ -48,12 +60,23 @@ BOARD_SUB         = atmega328p
 
 ### AVR_TOOLS_DIR
 ### Path to the AVR tools directory such as avr-gcc, avr-g++, etc.
-AVR_TOOLS_DIR     = /usr/local
+ifeq ($(CURRENT_OS), MAC)
+    AVR_TOOLS_DIR     = /usr/local
+else ifeq ($(CURRENT_OS), LINUX)
+    AVR_TOOLS_DIR     = /usr
+else
+endif
 
 ### AVRDDUDE
 ### Path to avrdude directory.
-AVRDDUDE          = /usr/local/bin/avrdude
-AVRDUDE_CONF      = /usr/local/etc/avrdude.conf
+ifeq ($(CURRENT_OS), MAC)
+    AVRDDUDE          = /usr/local/bin/avrdude
+    AVRDUDE_CONF      = /usr/local/etc/avrdude.conf
+else ifeq ($(CURRENT_OS), LINUX)
+    AVRDDUDE          = /usr/bin/avrdude
+    AVRDUDE_CONF      = etc/avrdude.conf
+else
+endif
 
 ### CFLAGS_STD
 CFLAGS_STD        = -std=gnu11
@@ -76,7 +99,11 @@ MONITOR_BAUDRATE  = 9600
 
 ### MONITOR
 ### The port your board is connected to. Using an '*' tries all the ports and finds the right one.
-MONITOR_PORT      = /dev/tty.usbmodem1421
+ifeq ($(CURRENT_OS), MAC)
+    MONITOR_PORT      = /dev/tty.usbmodem1421
+else ifeq ($(CURRENT_OS), LINUX)
+else
+endif
 
 ### OBJDIR
 ### This is were you put the binaries you just compile using 'make'
