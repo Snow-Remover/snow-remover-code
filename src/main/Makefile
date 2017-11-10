@@ -74,7 +74,7 @@ ifeq ($(CURRENT_OS), MAC)
     AVRDUDE_CONF      = /usr/local/etc/avrdude.conf
 else ifeq ($(CURRENT_OS), LINUX)
     AVRDDUDE          = /usr/bin/avrdude
-    AVRDUDE_CONF      = etc/avrdude.conf
+    AVRDUDE_CONF      = /etc/avrdude.conf
 else
 endif
 
