@@ -38,6 +38,11 @@ namespace Measurement
   }
   
   
+  //
+  // private
+  //
+  
+  
   void Angle::_set_degrees(float degrees)
   {
     _degrees = degrees;
