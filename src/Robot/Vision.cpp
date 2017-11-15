@@ -26,6 +26,10 @@ namespace Robot
   
   void Vision::tick()
   {
+    
+    Hardware::LIDARSensor* sensor = &Hardware::Main::lidar_sensor; // use this to access lidar
+    
+    
   }
   
   

@@ -6,6 +6,7 @@
 #include "StepperMotor.h"
 #include "ServoMotor.h"
 #include "AdafruitMotorShield.h"
+#include "LIDARLite.h"
 
 #include "LIDARSensor.h"
 #include "Main.h"

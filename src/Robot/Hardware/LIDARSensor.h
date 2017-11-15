@@ -14,12 +14,14 @@ namespace Robot
       
       LIDARSensor();
       
-      unsigned int distance();
+      int distance();
       void setup();
-      void tick();
+      //void tick();
       
       private:
       
+      boolean _is_setup;
+      LIDARLite _lidar_lite;
       
     };
     
