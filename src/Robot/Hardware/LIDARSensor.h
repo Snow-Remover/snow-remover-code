@@ -4,27 +4,28 @@
 
 namespace Robot
 {
-  namespace Hardware 
+  namespace Hardware
   {
-    
+
     class LIDARSensor
     {
-    
+
       public:
-      
+
       LIDARSensor();
-      
+
       int distance();
       void setup();
       //void tick();
-      
+
       private:
-      
+
       boolean _is_setup;
       LIDARLite _lidar_lite;
-      
+      int _biasCount;
+
     };
-    
+
   }
 }
 
