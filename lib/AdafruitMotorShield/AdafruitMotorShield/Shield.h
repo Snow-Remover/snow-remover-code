@@ -14,43 +14,35 @@
  All text above must be included in any redistribution.
  ******************************************************************/
 
-#ifndef _ADAFRUIT_MOTTR_SHIELD_ADAFRUIT_MOTTR_SHIELD_H_
-#define _ADAFRUIT_MOTTR_SHIELD_ADAFRUIT_MOTTR_SHIELD_H_
+#ifndef _ADAFRUIT_MOTTR_SHIELD_SHIELD_H_
+#define _ADAFRUIT_MOTTR_SHIELD_SHIELD_H_
 
-#define MICROSTEPS 16         // 8 or 16
-
-#define MOTOR1_A 2
-#define MOTOR1_B 3
-#define MOTOR2_A 1
-#define MOTOR2_B 4
-#define MOTOR4_A 0
-#define MOTOR4_B 6
-#define MOTOR3_A 5
-#define MOTOR3_B 7
-
-#define FORWARD 1
-#define BACKWARD 2
-#define BRAKE 3
-#define RELEASE 4
-
-#define SINGLE 1
-#define DOUBLE 2
-#define INTERLEAVE 3
-#define MICROSTEP 4
-
-#include <inttypes.h>
-#include <Wire.h>
-#include <Arduino.h>
 
 namespace AdafruitMotorShield
 {
-  class Shield;
+  
+  class Shield
+  {
+    
+    friend class DCMotor;
+    friend class StepperMotor;
+    
+    public:
+    
+    Shield(uint8_t ic2_address = 0x60);
+    
+    void begin(uint16_t frequency = 1600);
+    DCMotor* get_dc_motor(uint8_t n);
+    StepperMotor* get_stepper_motor(uint8_t n);
+    
+    private:
+    
+    DCMotor* dc_motors[4];
+    StepperMotor* stepper_motors[2];
+    PinDriver _pin_driver;
+    
+  };
+  
 }
-
-#include "AdafruitMotorShield/PinDriver.h"
-#include "AdafruitMotorShield/DCMotor.h"
-#include "AdafruitMotorShield/StepperMotor.h"
-#include "AdafruitMotorShield/Shield.h"
-
 
 #endif

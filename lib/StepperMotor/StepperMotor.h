@@ -3,7 +3,7 @@
 
 /* This class abstracts the functionality of a stepper motor.
  * 
- * We use this to conveniently turn angles specified while keeping track
+ * We use this to conveniently turn angles you specify while keeping track
  * of its positon.
  * 
  * This class is a task. As such the 'tick()' method must be called
@@ -17,7 +17,7 @@
 #include "Math.h"
 #include "AdafruitMotorShield.h"
 #include "PeriodicTimer.h"
-#include "Angle.h"
+#include "Measurement.h"
 
 
 class StepperMotor
@@ -28,37 +28,40 @@ class StepperMotor
   enum class Direction { Forward, Reverse };
   enum class StepType { Single, Double, Interleave, Microstep };
   
-  StepperMotor(AdafruitStepperMotor* motor, unsigned int num_steps, StepType step_type, boolean invert_direction);
+  StepperMotor(AdafruitMotorShield::StepperMotor* motor, const unsigned int num_steps, const StepType step_type, const boolean invert_direction = false);
   
-  Angle angle();
-  void turn_to_angle(Angle angle, Direction direction, float speed);
-  void turn_to_step(unsigned int step, Direction direction, float speed);
-  void reset_origin();
-  unsigned int current_step();
-  void stop();
+  Measurement::Angle angle();
+  const Measurement::Angle desired_angle();
+  long desired_step();
+  boolean is_rotating();
   boolean is_stopped();
+  void reset();
+  void rotate(const Measurement::Angle angle, const float speed);
+  void rotate(const Direction direction, const float speed);
+  void rotate(const long steps, const float speed);
+  void rotate_to(const Measurement::Angle angle, const float speed);
+  void rotate_to(const long step, const float speed);
+  void stop();
+  long step();
   void tick();
-  void turn(Direction direction, float speed);
-  void turn_angle(Angle angle, Direction direction, float speed);
-  void turn_steps(unsigned long steps, Direction direction, float speed);
-  boolean is_turning();
   
   private:
   
-  unsigned int _current_step;
+  long _current_step;
+  Measurement::Angle _desired_angle;
+  long _desired_step;
   Direction _direction;
-  AdafruitStepperMotor* _motor;
-  int _native_step_type;
-  int _native_direction; 
+  boolean _infinite_rotation;
   boolean _is_direction_inverted;
-  boolean _is_turning;
+  AdafruitMotorShield::StepperMotor* _motor;
+  int _native_direction;
+  int _native_step_type;
+  unsigned int _revolution_step_count;
   PeriodicTimer _step_timer;
-  StepType _step_type;
-  unsigned long _steps_to_turn;
-  unsigned int _total_steps;
   
-  void _setup_speed(float speed);
-  void _start(unsigned long steps, Direction direction, float speed);
+  void _make_step();
+  void _set_direction(const Direction direction);
+  void _set_speed(const float speed);
   
 };
 
