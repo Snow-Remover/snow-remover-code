@@ -34,7 +34,6 @@ namespace Measurement
     AnyAngle operator/(const Numeric number);
     AnyAngle operator/(const AnyAngle other_angle);
     AnyAngle operator%(AnyAngle other_angle);
-    AnyAngle operator=(const AnyAngle other_angle);
     
     protected:
     

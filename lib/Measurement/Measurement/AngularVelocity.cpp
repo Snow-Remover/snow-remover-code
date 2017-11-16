@@ -55,12 +55,6 @@ namespace Measurement
   }
   
   
-  AngularVelocity AngularVelocity::operator=(const AngularVelocity other_angular_velocity)
-  {
-    return AngularVelocity::from_degrees_per_second(other_angular_velocity.degrees_per_second());
-  }
-  
-  
   //
   // private
   //

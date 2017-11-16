@@ -124,13 +124,6 @@ namespace Measurement
   }
   
   
-  template <class AnyAngle>
-  AnyAngle BaseAngle<AnyAngle>::operator=(const AnyAngle other_angle)
-  {
-    return AnyAngle::from_degrees(other_angle.degrees());
-  }
-  
-  
   //
   // private
   //
