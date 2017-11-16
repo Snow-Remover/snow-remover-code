@@ -15,16 +15,21 @@ namespace Measurement
   }
   
   
-  Angle Angle::absolute()
+  Angle Angle::absolute() const
   {
     return Angle::from_degrees(abs(degrees()));
   }
   
   
-  Angle Angle::operator-()
+  Angle Angle::operator-() const
   {
     return Angle::from_degrees(-degrees());
   }
+  
+  
+  //
+  // private
+  //
   
   
   Comparable<Angle>::Comparison Angle::_compare_with(const Angle other_angle) const

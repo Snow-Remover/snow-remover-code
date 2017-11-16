@@ -83,12 +83,13 @@ void StepperMotor::reset()
 }
 
 
-void StepperMotor::rotate(const Measurement::Angle angle, const float speed)
+void StepperMotor::rotate(const Measurement::Angle angle, const Measurement::AngularVelocity angular_velocity)
 {
   stop();
+  if (angular_velocity <= Measurement::AngularVelocity::zero()) return;
   _desired_angle += angle;
   _desired_step = round(_desired_angle.revolutions() * _revolution_step_count);
-  _set_speed(speed);
+  _set_angular_velocity(angular_velocity.absolute());
   if (angle >= Measurement::Angle::zero())
     _set_direction(Direction::Forward);
   else
@@ -96,21 +97,25 @@ void StepperMotor::rotate(const Measurement::Angle angle, const float speed)
 }
 
 
-void StepperMotor::rotate(const Direction direction, const float speed)
+void StepperMotor::rotate(const Measurement::AngularVelocity angular_velocity)
 {
   stop();
-  _set_direction(direction);
-  _set_speed(speed);
+  if (angular_velocity >= Measurement::AngularVelocity::zero())
+    _set_direction(Direction::Forward);
+  else
+    _set_direction(Direction::Reverse);
+  _set_angular_velocity(angular_velocity.absolute());
   _infinite_rotation = true;
 }
 
 
-void StepperMotor::rotate(const long steps, const float speed)
+void StepperMotor::rotate(const long steps, const Measurement::AngularVelocity angular_velocity)
 {
   stop();
+  if (angular_velocity <= Measurement::AngularVelocity::zero()) return;
   _desired_step += steps;
   _desired_angle = Measurement::Angle::from_revolutions((float)_desired_step / _revolution_step_count);
-  _set_speed(speed);
+  _set_angular_velocity(angular_velocity.absolute());
   if (steps >= 0)
     _set_direction(Direction::Forward);
   else
@@ -118,12 +123,13 @@ void StepperMotor::rotate(const long steps, const float speed)
 }
 
 
-void StepperMotor::rotate_to(const Measurement::Angle angle, const float speed)
+void StepperMotor::rotate_to(const Measurement::Angle angle, const Measurement::AngularVelocity angular_velocity)
 {
   stop();
+  if (angular_velocity <= Measurement::AngularVelocity::zero()) return;
   _desired_step = round(angle.revolutions() * _revolution_step_count);
   _desired_angle = angle;
-  _set_speed(speed);
+  _set_angular_velocity(angular_velocity.absolute());
   if (_current_step < _desired_step)
     _set_direction(Direction::Forward);
   else
@@ -131,12 +137,13 @@ void StepperMotor::rotate_to(const Measurement::Angle angle, const float speed)
 }
 
 
-void StepperMotor::rotate_to(const long step, const float speed)
+void StepperMotor::rotate_to(const long step, const Measurement::AngularVelocity angular_velocity)
 {
   stop();
+  if (angular_velocity <= Measurement::AngularVelocity::zero()) return;
   _desired_step = step;
   _desired_angle = Measurement::Angle::from_revolutions((float)_desired_step / _revolution_step_count);
-  _set_speed(speed);
+  _set_angular_velocity(angular_velocity.absolute());
   if (_current_step < _desired_step)
     _set_direction(Direction::Forward);
   else
@@ -183,11 +190,11 @@ void StepperMotor::_make_step()
 }
 
 
-void StepperMotor::_set_speed(const float speed)
+void StepperMotor::_set_angular_velocity(const Measurement::AngularVelocity angular_velocity)
 {
-  //speed; //rpm
-  float step_time = 1/speed; // m per rev
-  step_time = step_time * 60000000; // us per rev
+  //order these calculations appropriately to avoid roundoff error
+  float step_time = 1 / angular_velocity.revolutions_per_second(); // s per rev
+  step_time = step_time * 1000000; // us per rev
   step_time = step_time / _revolution_step_count; // us per step
   _step_timer = PeriodicTimer((unsigned long)step_time, PeriodicTimer::Units::Microseconds);
   _step_timer.reset();
