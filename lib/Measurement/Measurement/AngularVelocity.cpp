@@ -66,6 +66,17 @@ namespace Measurement
   //
   
   
+  Comparable<AngularVelocity>::Comparison AngularVelocity::_compare_with(const AngularVelocity other_angular_velocity) const
+  {
+    if (degrees_per_second() < other_angular_velocity.degrees_per_second())
+      return Comparable::Comparison::Less;
+    else if (degrees_per_second() > other_angular_velocity.degrees_per_second())
+      return Comparable::Comparison::Greater;
+    else
+      return Comparable::Comparison::Equal;
+  }
+  
+  
   void AngularVelocity::_set_degrees_per_second(float degrees_per_second)
   {
     _degrees_per_second = degrees_per_second;

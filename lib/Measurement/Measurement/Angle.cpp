@@ -27,6 +27,11 @@ namespace Measurement
   }
   
   
+  //
+  // private
+  //
+  
+  
   Comparable<Angle>::Comparison Angle::_compare_with(const Angle other_angle) const
   {
     if (degrees() < other_angle.degrees())
@@ -36,11 +41,6 @@ namespace Measurement
     else
       return Comparable::Comparison::Equal;
   }
-  
-  
-  //
-  // private
-  //
   
   
   void Angle::_set_degrees(float degrees)
