@@ -67,30 +67,32 @@ namespace Measurement
   
   
   template <class AnyAngle>
-  AnyAngle BaseAngle<AnyAngle>::operator+(const AnyAngle other_angle)
-  {
-      return AnyAngle::from_degrees(degrees() + other_angle.degrees());
-  }
-  
-  
-  template <class AnyAngle>
-  AnyAngle BaseAngle<AnyAngle>::operator+=(const AnyAngle other_angle)
+  AnyAngle BaseAngle<AnyAngle>::operator+(const AnyAngle& other_angle)
   {
     return AnyAngle::from_degrees(degrees() + other_angle.degrees());
   }
   
   
   template <class AnyAngle>
-  AnyAngle BaseAngle<AnyAngle>::operator-(const AnyAngle other_angle)
+  BaseAngle<AnyAngle>& BaseAngle<AnyAngle>::operator+=(const AnyAngle& other_angle)
   {
-      return AnyAngle::from_degrees(degrees() - other_angle.degrees());
+    _set_degrees(degrees() + other_angle.degrees());
+    return *this;
   }
   
   
   template <class AnyAngle>
-  AnyAngle BaseAngle<AnyAngle>::operator-=(const AnyAngle other_angle)
+  AnyAngle BaseAngle<AnyAngle>::operator-(const AnyAngle& other_angle)
   {
-      return AnyAngle::from_degrees(degrees() - other_angle.degrees());
+    return AnyAngle::from_degrees(degrees() - other_angle.degrees());
+  }
+  
+  
+  template <class AnyAngle>
+  BaseAngle<AnyAngle>& BaseAngle<AnyAngle>::operator-=(const AnyAngle& other_angle)
+  {
+    _set_degrees(degrees() - other_angle.degrees());
+    return *this;
   }
   
   
@@ -98,7 +100,16 @@ namespace Measurement
   template <typename Numeric>
   AnyAngle BaseAngle<AnyAngle>::operator*(const Numeric number)
   {
-      return AnyAngle::from_degrees(degrees() * number);
+    return AnyAngle::from_degrees(degrees() * number);
+  }
+  
+  
+  template <class AnyAngle>
+  template <typename Numeric>
+  BaseAngle<AnyAngle>& BaseAngle<AnyAngle>::operator*=(const Numeric number)
+  {
+    _set_degrees(degrees() * number);
+    return *this;
   }
   
   
@@ -111,16 +122,49 @@ namespace Measurement
   
   
   template <class AnyAngle>
-  AnyAngle BaseAngle<AnyAngle>::operator/(const AnyAngle other_angle)
+  template <typename Numeric>
+  BaseAngle<AnyAngle>& BaseAngle<AnyAngle>::operator/=(const Numeric number)
+  {
+    _set_degrees(degrees() / number);
+    return *this;
+  }
+  
+  
+  template <class AnyAngle>
+  AnyAngle BaseAngle<AnyAngle>::operator/(const AnyAngle& other_angle)
   {
     return AnyAngle::from_degrees(degrees() / other_angle.degrees());
   }
   
   
   template <class AnyAngle>
-  AnyAngle BaseAngle<AnyAngle>::operator%(AnyAngle other_angle)
+  BaseAngle<AnyAngle>& BaseAngle<AnyAngle>::operator/=(const AnyAngle& other_angle)
+  {
+    _set_degrees(degrees() / other_angle.degrees());
+    return *this;
+  }
+  
+  
+  template <class AnyAngle>
+  AnyAngle BaseAngle<AnyAngle>::operator%(AnyAngle& other_angle)
   {
     return AnyAngle::from_degrees(fmod (degrees(), other_angle.degrees()));
+  }
+  
+  
+  template <class AnyAngle>
+  BaseAngle<AnyAngle>& BaseAngle<AnyAngle>::operator%=(AnyAngle& other_angle)
+  {
+    _set_degrees(fmod (degrees(), other_angle.degrees()));
+    return *this;
+  }
+  
+  
+  template <class AnyAngle>
+  BaseAngle<AnyAngle>& BaseAngle<AnyAngle>::operator=(const AnyAngle& other_angle)
+  {
+     _set_degrees(other_angle.degrees());
+     return *this;
   }
   
   
