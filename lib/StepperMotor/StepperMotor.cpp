@@ -100,10 +100,12 @@ void StepperMotor::rotate(const Measurement::Angle angle, const Measurement::Ang
 void StepperMotor::rotate(const Measurement::AngularVelocity angular_velocity)
 {
   stop();
-  if (angular_velocity >= Measurement::AngularVelocity::zero())
+  if (angular_velocity > Measurement::AngularVelocity::zero())
     _set_direction(Direction::Forward);
-  else
+  else if (angular_velocity < Measurement::AngularVelocity::zero())
     _set_direction(Direction::Reverse);
+  else
+    return;
   _set_angular_velocity(angular_velocity.absolute());
   _infinite_rotation = true;
 }
