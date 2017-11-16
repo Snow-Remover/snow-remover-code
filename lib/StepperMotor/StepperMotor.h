@@ -36,11 +36,11 @@ class StepperMotor
   boolean is_rotating();
   boolean is_stopped();
   void reset();
-  void rotate(const Measurement::Angle angle, const float speed);
-  void rotate(const Direction direction, const float speed);
-  void rotate(const long steps, const float speed);
-  void rotate_to(const Measurement::Angle angle, const float speed);
-  void rotate_to(const long step, const float speed);
+  void rotate(const Measurement::Angle angle, const Measurement::AngularVelocity angular_velocity);
+  void rotate(const Measurement::AngularVelocity angular_velocity);
+  void rotate(const long steps, const Measurement::AngularVelocity angular_velocity);
+  void rotate_to(const Measurement::Angle angle, const Measurement::AngularVelocity angular_velocity);
+  void rotate_to(const long step, const Measurement::AngularVelocity angular_velocity);
   void stop();
   long step();
   void tick();
@@ -61,7 +61,7 @@ class StepperMotor
   
   void _make_step();
   void _set_direction(const Direction direction);
-  void _set_speed(const float speed);
+  void _set_angular_velocity(const Measurement::AngularVelocity angular_velocity);
   
 };
 

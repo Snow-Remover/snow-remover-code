@@ -49,6 +49,12 @@ namespace Measurement
   }
   
   
+  AngularVelocity AngularVelocity::absolute() const
+  {
+    return AngularVelocity::from_degrees_per_second(abs(degrees_per_second()));
+  }
+  
+  
   AngularVelocity AngularVelocity::operator=(const AngularVelocity other_angular_velocity)
   {
     return AngularVelocity::from_degrees_per_second(other_angular_velocity.degrees_per_second());

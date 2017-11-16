@@ -15,13 +15,13 @@ namespace Measurement
   }
   
   
-  Angle Angle::absolute()
+  Angle Angle::absolute() const
   {
     return Angle::from_degrees(abs(degrees()));
   }
   
   
-  Angle Angle::operator-()
+  Angle Angle::operator-() const
   {
     return Angle::from_degrees(-degrees());
   }

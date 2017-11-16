@@ -15,8 +15,8 @@ namespace Measurement
     
     using BaseAngle::BaseAngle;
     
-    Angle absolute();
-    Angle operator-();
+    Angle absolute() const;
+    Angle operator-() const;
     using BaseAngle<Angle>::operator-;
     
     protected:
