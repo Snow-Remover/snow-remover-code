@@ -22,7 +22,7 @@ StepperMotor::StepperMotor(AdafruitMotorShield::StepperMotor* motor, const unsig
       break;
     case StepType::Interleave:
       _native_step_type = INTERLEAVE;
-      _revolution_step_count = revolution_step_count;
+      _revolution_step_count = revolution_step_count * 2;
       break;
     case StepType::Microstep:
       _native_step_type = MICROSTEP;
