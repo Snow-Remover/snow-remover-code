@@ -26,6 +26,11 @@ endif
 PROJECT_DIR       = $(MAKEFILE_DIR)/
 
 
+### SRC_DIR
+## change this if you are working on a test
+SRC_DIR       = $(PROJECT_DIR)/src
+
+
 ### define function to recursively search for files
 ## eg To find all the c files in the current directory:
 ##    $(call rwildcard, , *.c)
@@ -36,8 +41,8 @@ rwildcard = $(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subs
 
 ### find all .cpp files so we can compile them, even if we dont use them all
 #LOCAL_C_SRCS    = $(wildcard src/*.c)
-LOCAL_CPP_SRCS  = $(call rwildcard, lib/, *.cpp)
-LOCAL_CPP_SRCS  += $(call rwildcard, src/, *.cpp)
+LOCAL_CPP_SRCS  = $(call rwildcard, $(PROJECT_DIR)/lib/, *.cpp)
+LOCAL_CPP_SRCS  += $(call rwildcard, $(SRC_DIR)/, *.cpp)
 #LOCAL_CC_SRCS   = $(wildcard src/*.cc)
 #LOCAL_PDE_SRCS  = $(wildcard src/*.pde)
 #LOCAL_INO_SRCS  = $(wildcard src/*.ino)
@@ -99,7 +104,7 @@ CFLAGS_STD        = -std=gnu11
 CXXFLAGS_STD      = -std=gnu++11
 # The root folders of each library directory have the header files that our code may include
 # Here, we append each of the libraries' root directory to the search path of the compiler
-libraries := $(wildcard lib/*/)
+libraries := $(wildcard $(PROJECT_DIR)/lib/*/)
 CXXFLAGS_STD += $(foreach dir,$(libraries), -I$(dir))
 #CXXFLAGS_STD += -ffunction-sections -Wl,-gc-sections
 
