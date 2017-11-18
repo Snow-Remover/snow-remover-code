@@ -131,17 +131,10 @@ namespace Measurement
   
   
   template <class AnyAngle>
-  AnyAngle BaseAngle<AnyAngle>::operator/(const AnyAngle& other_angle)
+  template <typename Numeric>
+  Numeric BaseAngle<AnyAngle>::operator/(const AnyAngle& other_angle)
   {
-    return AnyAngle::from_degrees(degrees() / other_angle.degrees());
-  }
-  
-  
-  template <class AnyAngle>
-  BaseAngle<AnyAngle>& BaseAngle<AnyAngle>::operator/=(const AnyAngle& other_angle)
-  {
-    _set_degrees(degrees() / other_angle.degrees());
-    return *this;
+    return degrees() / other_angle.degrees();
   }
   
   
@@ -155,7 +148,7 @@ namespace Measurement
   template <class AnyAngle>
   BaseAngle<AnyAngle>& BaseAngle<AnyAngle>::operator%=(AnyAngle& other_angle)
   {
-    _set_degrees(fmod (degrees(), other_angle.degrees()));
+    _set_degrees(fmod(degrees(), other_angle.degrees()));
     return *this;
   }
   

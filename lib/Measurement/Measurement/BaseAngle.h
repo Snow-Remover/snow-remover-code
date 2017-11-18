@@ -36,8 +36,8 @@ namespace Measurement
     AnyAngle operator/(const Numeric number);
     template <typename Numeric>
     BaseAngle<AnyAngle>& operator/=(const Numeric number);
-    AnyAngle operator/(const AnyAngle& other_angle);
-    BaseAngle<AnyAngle>& operator/=(const AnyAngle& other_angle);
+    template <typename Numeric>
+    Numeric operator/(const AnyAngle& other_angle);
     AnyAngle operator%(AnyAngle& other_angle);
     BaseAngle<AnyAngle>& operator%=(AnyAngle& other_angle);
     BaseAngle<AnyAngle>& operator=(const AnyAngle& other_angle);

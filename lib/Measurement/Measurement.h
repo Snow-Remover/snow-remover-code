@@ -14,6 +14,7 @@
 #include "Measurement/Angle.h"
 #include "Measurement/CoterminalAngle.h"
 #include "Measurement/AngularVelocity.h"
+#include "Measurement/Distance.h"
 
 // Include implementation file at the end of the header. This way,
 // implementation is still separated from declaration, but is accessible
