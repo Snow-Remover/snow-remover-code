@@ -126,7 +126,7 @@ MONITOR_BAUDRATE  = 9600
 ifeq ($(CURRENT_OS), MAC)
     MONITOR_PORT      = /dev/tty.usbmodem1421
 else ifeq ($(CURRENT_OS), LINUX)
-    MONITOR_PORT      = /dev/ttyACM*
+    MONITOR_PORT      = /dev/ttyUSB*
 else
 endif
 
@@ -136,4 +136,3 @@ OBJDIR            = $(PROJECT_DIR)/bin/$(CURRENT_DIR)/$(BOARD_TAG)
 
 ### path to Arduino.mk, inside the ARDMK_DIR, don't touch.
 include $(ARDMK_DIR)/Arduino.mk
-
