@@ -26,6 +26,8 @@ namespace Measurement
     
     CoterminalAngle difference_from(const CoterminalAngle other_angle);
     boolean is_between(const CoterminalAngle start_angle, const CoterminalAngle end_angle);
+    boolean is_not_between(const CoterminalAngle start_angle, const CoterminalAngle end_angle);
+    Angle to_angle_between(const Angle start_angle, const Angle end_angle);
     boolean operator==(const CoterminalAngle other_angle);
     boolean operator!=(const CoterminalAngle other_angle);
     

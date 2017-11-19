@@ -53,6 +53,13 @@ boolean Comparable<AnyType>::is_between(const AnyType start_range_object, const 
 }
 
 
+template <class AnyType>
+boolean Comparable<AnyType>::is_not_between(const AnyType start_range_object, const AnyType end_range_object) const
+{
+  return !is_between(start_range_object, end_range_object);
+}
+
+
 //
 // private
 //

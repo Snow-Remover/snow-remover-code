@@ -57,6 +57,7 @@ class Comparable
   boolean operator>(const AnyType other_object) const;
   boolean operator>=(const AnyType other_object) const;
   boolean is_between(const AnyType start_range_object, const AnyType end_range_object) const;
+  boolean is_not_between(const AnyType start_range_object, const AnyType end_range_object) const;
   
   protected:
   

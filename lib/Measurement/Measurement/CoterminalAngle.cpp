@@ -36,6 +36,32 @@ namespace Measurement
   }
   
   
+  boolean CoterminalAngle::is_not_between(const CoterminalAngle start_angle, const CoterminalAngle end_angle)
+  {
+    return !is_between(start_angle, end_angle);
+  }
+  
+  
+  Angle CoterminalAngle::to_angle_between(const Angle start_angle, const Angle end_angle)
+  {
+    if ((end_angle - start_angle) != Angle::revolution())
+    {
+      // range is invalid
+      end();
+    }
+    Angle this_angle = to_angle();
+    while (true)
+    {
+      if (this_angle.is_between(start_angle, end_angle))
+        return this_angle;
+      else if (this_angle < start_angle)
+        this_angle += Angle::revolution();
+      else // if this_angle > end_angle
+        this_angle -= Angle::revolution();
+    }
+  }
+  
+  
   boolean CoterminalAngle::operator==(const CoterminalAngle other_angle)
   {
     return degrees() == other_angle.degrees();
