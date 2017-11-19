@@ -3,6 +3,7 @@
 
 #include <Arduino.h>
 
+#include "NativeExtensions.h"
 #include "Comparable.h"
 
 // arduino library implements degrees(rad) as a macro, eww
