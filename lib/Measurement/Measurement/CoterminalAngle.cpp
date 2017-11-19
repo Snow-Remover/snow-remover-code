@@ -9,7 +9,7 @@ namespace Measurement
   //
   
   
-  CoterminalAngle CoterminalAngle::difference_from(const CoterminalAngle other_angle)
+  CoterminalAngle CoterminalAngle::difference_from(const CoterminalAngle other_angle) const
   {
     Angle difference_angle = (to_angle() - other_angle.to_angle()).absolute();
     if (difference_angle > Angle::revolution() / 2)
@@ -18,7 +18,7 @@ namespace Measurement
   }
   
   
-  boolean CoterminalAngle::is_between(const CoterminalAngle start_angle, const CoterminalAngle end_angle)
+  boolean CoterminalAngle::is_between(const CoterminalAngle start_angle, const CoterminalAngle end_angle) const
   {
     Angle temp_start_angle = start_angle.to_angle();
     Angle temp_end_angle = end_angle.to_angle();
@@ -36,13 +36,13 @@ namespace Measurement
   }
   
   
-  boolean CoterminalAngle::is_not_between(const CoterminalAngle start_angle, const CoterminalAngle end_angle)
+  boolean CoterminalAngle::is_not_between(const CoterminalAngle start_angle, const CoterminalAngle end_angle) const
   {
     return !is_between(start_angle, end_angle);
   }
   
   
-  Angle CoterminalAngle::to_angle_between(const Angle start_angle, const Angle end_angle)
+  Angle CoterminalAngle::to_angle_between(const Angle start_angle, const Angle end_angle) const
   {
     if ((end_angle - start_angle) != Angle::revolution())
     {
@@ -62,13 +62,13 @@ namespace Measurement
   }
   
   
-  boolean CoterminalAngle::operator==(const CoterminalAngle other_angle)
+  boolean CoterminalAngle::operator==(const CoterminalAngle other_angle) const
   {
     return degrees() == other_angle.degrees();
   }
   
   
-  boolean CoterminalAngle::operator!=(const CoterminalAngle other_angle)
+  boolean CoterminalAngle::operator!=(const CoterminalAngle other_angle) const
   {
     return !(*this == other_angle);
   }

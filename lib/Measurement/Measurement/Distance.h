@@ -21,22 +21,22 @@ namespace Measurement
     float meters() const;
     float millimeters() const;
     Distance absolute() const;
-    Distance operator+(const Distance& other_distance);
+    Distance operator+(const Distance& other_distance) const;
     Distance& operator+=(const Distance& other_distance);
-    Distance operator-();
-    Distance operator-(const Distance& other_distance);
+    Distance operator-() const;
+    Distance operator-(const Distance& other_distance) const;
     Distance& operator-=(const Distance& other_distance);
     template <typename Numeric>
-    Distance operator*(const Numeric number);
+    Distance operator*(const Numeric number) const;
     template <typename Numeric>
     Distance& operator*=(const Numeric number);
     template <typename Numeric>
-    Distance operator/(const Numeric number);
+    Distance operator/(const Numeric number) const;
     template <typename Numeric>
     Distance& operator/=(const Numeric number);
     template <typename Numeric>
-    Numeric operator/(const Distance& other_distance);
-    Distance operator%(Distance& other_distance);
+    Numeric operator/(const Distance& other_distance) const;
+    Distance operator%(Distance& other_distance) const;
     Distance& operator%=(Distance& other_distance);
     Distance& operator=(const Distance& other_distance);
     

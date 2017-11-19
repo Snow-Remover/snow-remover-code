@@ -69,7 +69,7 @@ namespace Measurement
   }
   
   
-  Distance Distance::operator+(const Distance& other_distance)
+  Distance Distance::operator+(const Distance& other_distance) const
   {
     return Distance::from_meters(meters() + other_distance.meters());
   }
@@ -82,13 +82,13 @@ namespace Measurement
   }
   
   
-  Distance Distance::operator-()
+  Distance Distance::operator-() const
   {
     return Distance::from_meters(-meters());
   }
   
   
-  Distance Distance::operator-(const Distance& other_distance)
+  Distance Distance::operator-(const Distance& other_distance) const
   {
     return Distance::from_meters(meters() - other_distance.meters());
   }
@@ -102,7 +102,7 @@ namespace Measurement
   
   
   template <typename Numeric>
-  Distance Distance::operator*(const Numeric number)
+  Distance Distance::operator*(const Numeric number) const
   {
     return Distance::from_meters(meters() * number);
   }
@@ -117,7 +117,7 @@ namespace Measurement
   
   
   template <typename Numeric>
-  Distance Distance::operator/(const Numeric number)
+  Distance Distance::operator/(const Numeric number) const
   {
     return Distance::from_meters(meters() / number);
   }
@@ -132,13 +132,13 @@ namespace Measurement
   
   
   template <typename Numeric>
-  Numeric Distance::operator/(const Distance& other_distance)
+  Numeric Distance::operator/(const Distance& other_distance) const
   {
     return meters() / other_distance.meters();
   }
   
   
-  Distance Distance::operator%(Distance& other_distance)
+  Distance Distance::operator%(Distance& other_distance) const
   {
     return Distance::from_meters(fmod(meters(), other_distance.meters()));
   }
