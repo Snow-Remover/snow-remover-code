@@ -9,6 +9,12 @@ namespace Measurement
   //
   
   
+  AngularVelocity AngularVelocity::absolute() const
+  {
+    return AngularVelocity::from_degrees_per_second(abs(degrees_per_second()));
+  }
+  
+  
   AngularVelocity AngularVelocity::from_degrees_per_second(const float degrees_per_second)
   {
     AngularVelocity new_angular_velocity;
@@ -46,12 +52,6 @@ namespace Measurement
   float AngularVelocity::revolutions_per_second() const
   {
     return _degrees_per_second / 360.0;
-  }
-  
-  
-  AngularVelocity AngularVelocity::absolute() const
-  {
-    return AngularVelocity::from_degrees_per_second(abs(degrees_per_second()));
   }
   
   

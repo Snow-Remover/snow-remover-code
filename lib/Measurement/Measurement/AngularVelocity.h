@@ -16,9 +16,9 @@ namespace Measurement
     
     AngularVelocity();
     
+    AngularVelocity absolute() const;
     float degrees_per_second() const;
     float revolutions_per_second() const;
-    AngularVelocity absolute() const;
     
     protected:
     

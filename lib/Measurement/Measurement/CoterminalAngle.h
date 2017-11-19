@@ -24,8 +24,8 @@ namespace Measurement
     
     using BaseAngle::BaseAngle;
     
-    boolean is_between(const CoterminalAngle start_angle, const CoterminalAngle end_angle);
     CoterminalAngle difference_from(const CoterminalAngle other_angle);
+    boolean is_between(const CoterminalAngle start_angle, const CoterminalAngle end_angle);
     boolean operator==(const CoterminalAngle other_angle);
     boolean operator!=(const CoterminalAngle other_angle);
     

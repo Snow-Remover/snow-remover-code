@@ -9,6 +9,15 @@ namespace Measurement
   //
   
   
+  CoterminalAngle CoterminalAngle::difference_from(const CoterminalAngle other_angle)
+  {
+    Angle difference_angle = (to_angle() - other_angle.to_angle()).absolute();
+    if (difference_angle > Angle::revolution() / 2)
+      difference_angle = Angle::revolution() - difference_angle;
+    return difference_angle.to_coterminal_angle();
+  }
+  
+  
   boolean CoterminalAngle::is_between(const CoterminalAngle start_angle, const CoterminalAngle end_angle)
   {
     Angle temp_start_angle = start_angle.to_angle();
@@ -24,15 +33,6 @@ namespace Measurement
     }
     
     return temp_this_angle.is_between(temp_start_angle, temp_end_angle);
-  }
-  
-  
-  CoterminalAngle CoterminalAngle::difference_from(const CoterminalAngle other_angle)
-  {
-    Angle difference_angle = (to_angle() - other_angle.to_angle()).absolute();
-    if (difference_angle > Angle::revolution() / 2)
-      difference_angle = Angle::revolution() - difference_angle;
-    return difference_angle.to_coterminal_angle();
   }
   
   

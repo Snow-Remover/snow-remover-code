@@ -9,18 +9,18 @@ namespace Measurement
   //
   
   
-  Distance Distance::from_meters(const float meters)
-  {
-    Distance new_distance;
-    new_distance._set_meters(meters);
-    return new_distance;
-  }
-  
-  
   Distance Distance::from_centimeters(const float centimeters)
   {
     Distance new_distance;
     new_distance._set_centimeters(centimeters);
+    return new_distance;
+  }
+  
+  
+  Distance Distance::from_meters(const float meters)
+  {
+    Distance new_distance;
+    new_distance._set_meters(meters);
     return new_distance;
   }
   
@@ -45,15 +45,15 @@ namespace Measurement
   }
   
   
-  float Distance::meters() const
-  {
-    return _meters;
-  }
-  
-  
   float Distance::centimeters() const
   {
     return _meters * 100.0;
+  }
+  
+  
+  float Distance::meters() const
+  {
+    return _meters;
   }
   
   
@@ -174,15 +174,15 @@ namespace Measurement
   }
   
   
-  void Distance::_set_meters(float meters)
-  {
-    _meters = meters;
-  }
-  
-  
   void Distance::_set_centimeters(float centimeters)
   {
     _set_meters(centimeters / 100.0);
+  }
+  
+  
+  void Distance::_set_meters(float meters)
+  {
+    _meters = meters;
   }
   
   
