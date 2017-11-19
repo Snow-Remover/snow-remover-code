@@ -1,5 +1,5 @@
-#ifndef _STEPPERMOTOR_H_
-#define _STEPPERMOTOR_H_
+#ifndef _STEPPER_MOTOR_H_
+#define _STEPPER_MOTOR_H_
 
 /* This class abstracts the functionality of a stepper motor.
  * 
