@@ -427,7 +427,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int getRead(uint8_t reg_address, uint8_t *pData, int size, uint16_t remote_id=NULL);
+    static int getRead(uint8_t reg_address, uint8_t *pData, int size, uint16_t remote_id=0);
 
     /**
     * Write to the registers of a local remote Pozyx device (anchor or tag).
@@ -441,7 +441,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int setWrite(uint8_t reg_address, uint8_t *pData, int size, uint16_t remote_id=NULL);
+    static int setWrite(uint8_t reg_address, uint8_t *pData, int size, uint16_t remote_id=0);
 
     /**
     * Call a register funcion on a local or remote Pozyx device (anchor or tag).
@@ -457,7 +457,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int useFunction(uint8_t reg_address, uint8_t *params=NULL, int param_size=0, uint8_t *pData=NULL, int size=0, uint16_t remote_id=NULL);
+    static int useFunction(uint8_t reg_address, uint8_t *params=NULL, int param_size=0, uint8_t *pData=NULL, int size=0, uint16_t remote_id=0);
 
 /** @}*/
 
@@ -535,7 +535,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int getLastNetworkId(uint16_t *network_id, uint16_t remote_id = NULL);
+    static int getLastNetworkId(uint16_t *network_id, uint16_t remote_id = 0);
 
     /**
     * Obtain the number of bytes received.
@@ -548,7 +548,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int getLastDataLength(uint8_t *data_length, uint16_t remote_id = NULL);
+    static int getLastDataLength(uint8_t *data_length, uint16_t remote_id = 0);
 
     /**
     * Obtain the network id of the connected Pozyx device.
@@ -573,7 +573,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int setNetworkId(uint16_t network_id, uint16_t remote_id = NULL);
+    static int setNetworkId(uint16_t network_id, uint16_t remote_id = 0);
 
     /**
     * Obtain the current UWB settings.
@@ -586,7 +586,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int getUWBSettings(UWB_settings_t *UWB_settings, uint16_t remote_id = NULL);
+    static int getUWBSettings(UWB_settings_t *UWB_settings, uint16_t remote_id = 0);
 
     /**
     * Overwrite the UWB settings.
@@ -601,7 +601,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int setUWBSettings(UWB_settings_t *UWB_settings, uint16_t remote_id = NULL);
+    static int setUWBSettings(UWB_settings_t *UWB_settings, uint16_t remote_id = 0);
 
     /**
     * Overwrite the UWB settings except the gain.
@@ -616,7 +616,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int setUWBSettingsExceptGain(UWB_settings_t *UWB_settings, uint16_t remote_id=NULL);
+    static int setUWBSettingsExceptGain(UWB_settings_t *UWB_settings, uint16_t remote_id=0);
     /**
     * Set the Ultra-wideband frequency channel.
     * This function sets the ultra-wideband (UWB) frequency channel used for transmission and reception.
@@ -629,7 +629,7 @@ public:
     * @retval #POZYX_SUCCESS success.
     * @retval #POZYX_FAILURE function failed.
     */
-    static int setUWBChannel(int channel_num, uint16_t remote_id = NULL);
+    static int setUWBChannel(int channel_num, uint16_t remote_id = 0);
 
     /**
     * Get the Ultra-wideband frequency channel.
@@ -644,7 +644,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int getUWBChannel(int* channel_num, uint16_t remote_id = NULL);
+    static int getUWBChannel(int* channel_num, uint16_t remote_id = 0);
 
     /**
     * configure the UWB transmission power.
@@ -663,7 +663,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int setTxPower(float txgain_dB, uint16_t remote_id = NULL);
+    static int setTxPower(float txgain_dB, uint16_t remote_id = 0);
 
     /**
     * Obtain the UWB transmission power.
@@ -678,7 +678,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int getTxPower(float* txgain_dB, uint16_t remote_id = NULL);
+    static int getTxPower(float* txgain_dB, uint16_t remote_id = 0);
 
 /** @}*/
 
@@ -698,7 +698,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int getWhoAmI(uint8_t *whoami, uint16_t remote_id = NULL);
+    static int getWhoAmI(uint8_t *whoami, uint16_t remote_id = 0);
 
     /**
     * Obtain the firmware version.
@@ -711,7 +711,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int getFirmwareVersion(uint8_t *firmware, uint16_t remote_id = NULL);
+    static int getFirmwareVersion(uint8_t *firmware, uint16_t remote_id = 0);
 
     /**
     * Obtain hte hardware version.
@@ -724,7 +724,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int getHardwareVersion(uint8_t *hardware, uint16_t remote_id = NULL);
+    static int getHardwareVersion(uint8_t *hardware, uint16_t remote_id = 0);
 
     /**
     * Obtain the selftest result.
@@ -737,7 +737,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int getSelftest(uint8_t *selftest, uint16_t remote_id = NULL);
+    static int getSelftest(uint8_t *selftest, uint16_t remote_id = 0);
 
     /**
     * Obtain the error code.
@@ -750,7 +750,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int getErrorCode(uint8_t *error_code, uint16_t remote_id = NULL);
+    static int getErrorCode(uint8_t *error_code, uint16_t remote_id = 0);
 
     /**
     * Obtain the interrupt status.
@@ -765,7 +765,7 @@ public:
     *
     * @see waitForFlag
     */
-    static int getInterruptStatus(uint8_t *interrupts, uint16_t remote_id = NULL);
+    static int getInterruptStatus(uint8_t *interrupts, uint16_t remote_id = 0);
 
     /**
     * Obtain the calibration status.
@@ -778,7 +778,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int getCalibrationStatus(uint8_t *calibration_status, uint16_t remote_id = NULL);
+    static int getCalibrationStatus(uint8_t *calibration_status, uint16_t remote_id = 0);
 
     /**
     * Obtain the digital value on one of the GPIO pins.
@@ -794,7 +794,7 @@ public:
     *
     * @note In firmware version v0.9. The GPIO state cannot be read remotely.
     */
-    static int getGPIO(int gpio_num, uint8_t *value, uint16_t remote_id = NULL);
+    static int getGPIO(int gpio_num, uint8_t *value, uint16_t remote_id = 0);
 
     /**
     * Set the digital value on one of the GPIO pins.
@@ -808,7 +808,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int setGPIO(int gpio_num, uint8_t value, uint16_t remote_id = NULL);
+    static int setGPIO(int gpio_num, uint8_t value, uint16_t remote_id = 0);
 
 
     /**
@@ -820,7 +820,7 @@ public:
     *
     * @see clearConfiguration, saveConfiguration
     */
-    static void resetSystem(uint16_t remote_id = NULL);
+    static void resetSystem(uint16_t remote_id = 0);
 
 
     /**
@@ -839,7 +839,7 @@ public:
     *
     * @see setLedConfig
     */
-    static int setLed(int led_num, boolean state, uint16_t remote_id = NULL);
+    static int setLed(int led_num, boolean state, uint16_t remote_id = 0);
 
     /**
     * Function to obtain the interrupt configuration.
@@ -853,7 +853,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int getInterruptMask(uint8_t *mask, uint16_t remote_id = NULL);
+    static int getInterruptMask(uint8_t *mask, uint16_t remote_id = 0);
 
     /**
     * Function to configure the interrupts.
@@ -868,7 +868,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int setInterruptMask(uint8_t mask, uint16_t remote_id = NULL);
+    static int setInterruptMask(uint8_t mask, uint16_t remote_id = 0);
 
 
     /**
@@ -884,7 +884,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int getConfigModeGPIO(int gpio_num, uint8_t *mode, uint16_t remote_id = NULL);
+    static int getConfigModeGPIO(int gpio_num, uint8_t *mode, uint16_t remote_id = 0);
 
     /**
     * Obtain the pull configuration of a GPIO pin.
@@ -899,7 +899,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int getConfigPullGPIO(int gpio_num, uint8_t *pull, uint16_t remote_id = NULL);
+    static int getConfigPullGPIO(int gpio_num, uint8_t *pull, uint16_t remote_id = 0);
 
 
     /**
@@ -916,7 +916,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int setConfigGPIO(int gpio_num, int mode, int pull, uint16_t remote_id = NULL);
+    static int setConfigGPIO(int gpio_num, int mode, int pull, uint16_t remote_id = 0);
 
     /**
     * Configure the LEDs.
@@ -933,7 +933,7 @@ public:
     *
     * @see setLed
     */
-    static int setLedConfig(uint8_t config = 0x0, uint16_t remote_id = NULL);
+    static int setLedConfig(uint8_t config = 0x0, uint16_t remote_id = 0);
 
         /**
      * Configure the interrupt pin.
@@ -946,7 +946,7 @@ public:
      * @retval #POZYX_SUCCESS success.
      * @retval #POZYX_FAIL function failed.
      */
-    static int configInterruptPin(int pin, int mode, int bActiveHigh, int bLatch, uint16_t remote_id=NULL);
+    static int configInterruptPin(int pin, int mode, int bActiveHigh, int bLatch, uint16_t remote_id=0);
 
     /**
     * Save (part of) the configuration to Flash memory.
@@ -967,7 +967,7 @@ public:
     *
     * @see clearConfiguration
     */
-    static int saveConfiguration(int type, uint8_t registers[] = NULL, int num_registers = 0, uint16_t remote_id = NULL);
+    static int saveConfiguration(int type, uint8_t registers[] = 0, int num_registers = 0, uint16_t remote_id = 0);
 
     /**
     * Save registers to the flash memory. See saveConfiguration for more information
@@ -982,7 +982,7 @@ public:
     * @retval #POZYX_TIMEOUT function timed out.
     * @see clearConfiguration
     */
-    static int saveRegisters(uint8_t registers[] = NULL, int num_registers = 0, uint16_t remote_id = NULL);
+    static int saveRegisters(uint8_t registers[] = 0, int num_registers = 0, uint16_t remote_id = 0);
 
     /**
     * Save the Pozyx's stored network to its flash memory. See saveConfiguration for more information
@@ -995,7 +995,7 @@ public:
     * @retval #POZYX_TIMEOUT function timed out.
     * @see clearConfiguration
     */
-    static int saveNetwork(uint16_t remote_id = NULL);
+    static int saveNetwork(uint16_t remote_id = 0);
 
     /**
     * Save the Pozyx's stored anchor list to its flash memory. See saveConfiguration for more information
@@ -1008,7 +1008,7 @@ public:
     * @retval #POZYX_TIMEOUT function timed out.
     * @see clearConfiguration
     */
-    static int saveAnchorIds(uint16_t remote_id = NULL);
+    static int saveAnchorIds(uint16_t remote_id = 0);
 
     /**
     * Save the Pozyx's stored UWB settings to its flash memory. See saveConfiguration for more information
@@ -1021,7 +1021,7 @@ public:
     * @retval #POZYX_TIMEOUT function timed out.
     * @see clearConfiguration
     */
-    static int saveUWBSettings(uint16_t remote_id = NULL);
+    static int saveUWBSettings(uint16_t remote_id = 0);
 
     // static int saveAnchorSelection(int type, uint8_t registers[] = NULL, int num_registers = 0, uint16_t remote_id = NULL);
 
@@ -1039,7 +1039,7 @@ public:
     *
     * @see saveConfiguration
     */
-    static int clearConfiguration(uint16_t remote_id = NULL);
+    static int clearConfiguration(uint16_t remote_id = 0);
 
     /**
      * Verify if a register content is saved in the flash memory.
@@ -1052,7 +1052,7 @@ public:
      * @retval true(1) if the register variable is saved
      * @retval false(0) if the register variable is not saved
      */
-    static bool isRegisterSaved(uint8_t regAddress, uint16_t remote_id = NULL);
+    static bool isRegisterSaved(uint8_t regAddress, uint16_t remote_id = 0);
 
     /**
      * Return the number of register variables saved in flash memory.
@@ -1061,7 +1061,7 @@ public:
      *
      * @return           the number of register variables saved in flash memory.
      */
-    static int getNumRegistersSaved(uint16_t remote_id = NULL);
+    static int getNumRegistersSaved(uint16_t remote_id = 0);
 
 /** @}*/
 
@@ -1085,7 +1085,7 @@ public:
     *
     * @see doPositioning, doRemotePositioning
     */
-    static int getCoordinates(coordinates_t *coordinates, uint16_t remote_id = NULL);
+    static int getCoordinates(coordinates_t *coordinates, uint16_t remote_id = 0);
 
     /**
     * Set the coordinates of the device.
@@ -1100,7 +1100,7 @@ public:
     *
     * @see getCoordinates
     */
-    static int setCoordinates(coordinates_t coordinates, uint16_t remote_id = NULL);
+    static int setCoordinates(coordinates_t coordinates, uint16_t remote_id = 0);
 
     /**
     * Obtain the last estimated position error covariance information.
@@ -1114,7 +1114,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int getPositionError(pos_error_t *pos_error, uint16_t remote_id = NULL);
+    static int getPositionError(pos_error_t *pos_error, uint16_t remote_id = 0);
 
     /**
     * Manually set which anchors to use for positioning.
@@ -1132,7 +1132,7 @@ public:
     *
     * @see setSelectionOfAnchors, getPositioningAnchorIds
     */
-    static int setPositioningAnchorIds(uint16_t anchors[], int anchor_num, uint16_t remote_id = NULL);
+    static int setPositioningAnchorIds(uint16_t anchors[], int anchor_num, uint16_t remote_id = 0);
 
     /**
     * Obtain which anchors used for positioning.
@@ -1149,7 +1149,7 @@ public:
     *
     * @see setSelectionOfAnchors, setPositioningAnchorIds
     */
-    static int getPositioningAnchorIds(uint16_t anchors[], int anchor_num, uint16_t remote_id = NULL);
+    static int getPositioningAnchorIds(uint16_t anchors[], int anchor_num, uint16_t remote_id = 0);
 
     /**
     * Read the update interval continuous positioning.
@@ -1164,7 +1164,7 @@ public:
     *
     * @see setUpdateInterval
     */
-    static int getUpdateInterval(uint16_t *ms, uint16_t remote_id = NULL);
+    static int getUpdateInterval(uint16_t *ms, uint16_t remote_id = 0);
 
     /**
     * Configure the udpate interval for continuous positioning.
@@ -1180,7 +1180,7 @@ public:
     *
     * @see getUpdateInterval
     */
-    static int setUpdateInterval(uint16_t ms, uint16_t remote_id = NULL);
+    static int setUpdateInterval(uint16_t ms, uint16_t remote_id = 0);
 
     /**
     * Obtain the configured ranging protocol.
@@ -1196,7 +1196,7 @@ public:
     *
     * @see doRanging, setRangingProtocol
     */
-    static int getRangingProtocol(uint8_t *protocol, uint16_t remote_id = NULL);
+    static int getRangingProtocol(uint8_t *protocol, uint16_t remote_id = 0);
 
     /**
     * Configure the ranging protocol.
@@ -1212,7 +1212,7 @@ public:
     *
     * @see doRanging, getRangingProtocol
     */
-    static int setRangingProtocol(uint8_t protocol, uint16_t remote_id = NULL);
+    static int setRangingProtocol(uint8_t protocol, uint16_t remote_id = 0);
 
     /** TODO
     * Obtain the configured positioning filter strength.
@@ -1229,7 +1229,7 @@ public:
     *
     * @see getPositionFilterType, getPositionFilter, setPositionFilter, setPositionFilterType, setPositionFilterStrength
     */
-    static int getPositionFilterStrength(uint8_t *filter_strength, uint16_t remote_id = NULL);
+    static int getPositionFilterStrength(uint8_t *filter_strength, uint16_t remote_id = 0);
 
     /** TODO
     * Obtain the configured positioning algorithm.
@@ -1245,7 +1245,7 @@ public:
     *
     * @see getPositionDimension, setPositionAlgorithm
     */
-    static int getPositionFilterType(uint8_t *filter_type, uint16_t remote_id = NULL);
+    static int getPositionFilterType(uint8_t *filter_type, uint16_t remote_id = 0);
 
     /** TODO
     * Configure the ranging protocol.
@@ -1261,7 +1261,7 @@ public:
     *
     * @see doRanging, getRangingProtocol
     */
-    static int setPositionFilter(uint8_t filter_type, uint8_t filter_strength, uint16_t remote_id = NULL);
+    static int setPositionFilter(uint8_t filter_type, uint8_t filter_strength, uint16_t remote_id = 0);
 
     /**
     * Obtain the configured positioning algorithm.
@@ -1277,7 +1277,7 @@ public:
     *
     * @see getPositionDimension, setPositionAlgorithm
     */
-    static int getPositionAlgorithm(uint8_t *algorithm, uint16_t remote_id = NULL);
+    static int getPositionAlgorithm(uint8_t *algorithm, uint16_t remote_id = 0);
 
     /**
     * Obtain the configured positioning dimension.
@@ -1292,7 +1292,7 @@ public:
     *
     * @see getPositionAlgorithm, setPositionAlgorithm
     */
-    static int getPositionDimension(uint8_t *dimension, uint16_t remote_id = NULL);
+    static int getPositionDimension(uint8_t *dimension, uint16_t remote_id = 0);
 
 
     /**
@@ -1309,7 +1309,7 @@ public:
     *
     * @see getPositionAlgorithm, getPositionDimension
     */
-    static int setPositionAlgorithm(int algorithm = POZYX_POS_ALG_UWB_ONLY, int dimension = 0x0, uint16_t remote_id = NULL);
+    static int setPositionAlgorithm(int algorithm = POZYX_POS_ALG_UWB_ONLY, int dimension = 0x0, uint16_t remote_id = 0);
 
     /**
     * Obtain the anchor selection mode.
@@ -1323,7 +1323,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int getAnchorSelectionMode(uint8_t *mode, uint16_t remote_id = NULL);
+    static int getAnchorSelectionMode(uint8_t *mode, uint16_t remote_id = 0);
 
 
     /**
@@ -1338,7 +1338,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int getNumberOfAnchors(uint8_t *nr_anchors, uint16_t remote_id = NULL);
+    static int getNumberOfAnchors(uint8_t *nr_anchors, uint16_t remote_id = 0);
 
 
     /**
@@ -1358,7 +1358,7 @@ public:
     *
     * @see setPositioningAnchorIds to set the anchor IDs in manual anchor selection mode.
     */
-    static int setSelectionOfAnchors(int mode, int nr_anchors, uint16_t remote_id = NULL);
+    static int setSelectionOfAnchors(int mode, int nr_anchors, uint16_t remote_id = 0);
 
     /**
     * Obtain the operation mode of the device.
@@ -1375,7 +1375,7 @@ public:
     *
     * @see setOperationMode
     */
-    static int getOperationMode(uint8_t *mode, uint16_t remote_id = NULL);
+    static int getOperationMode(uint8_t *mode, uint16_t remote_id = 0);
 
 
     /**
@@ -1392,7 +1392,7 @@ public:
     *
     * @see getOperationMode
     */
-    static int setOperationMode(uint8_t mode, uint16_t remote_id = NULL);
+    static int setOperationMode(uint8_t mode, uint16_t remote_id = 0);
 
 
     /**
@@ -1404,7 +1404,7 @@ public:
     * @retval String the textual error
     *
     */
-    static String getSystemError(uint16_t remote_id = NULL);
+    static String getSystemError(uint16_t remote_id = 0);
 
 
 /** @}*/
@@ -1425,7 +1425,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int getSensorMode(uint8_t *sensor_mode, uint16_t remote_id = NULL);
+    static int getSensorMode(uint8_t *sensor_mode, uint16_t remote_id = 0);
 
     /**
     * Configure the sensor mode.
@@ -1437,7 +1437,7 @@ public:
     * @retval #POZYX_SUCCESS success.
     * @retval #POZYX_FAILURE function failed.
     */
-    static int setSensorMode(uint8_t sensor_mode, uint16_t remote_id = NULL);
+    static int setSensorMode(uint8_t sensor_mode, uint16_t remote_id = 0);
 
     /**
     * Obtain all raw sensor data at once as it's stored in the registers.
@@ -1451,7 +1451,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int getRawSensorData(sensor_raw_t *sensor_raw, uint16_t remote_id = NULL);
+    static int getRawSensorData(sensor_raw_t *sensor_raw, uint16_t remote_id = 0);
 
     /**
     * Obtain all sensor data at once.
@@ -1465,7 +1465,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int getAllSensorData(sensor_data_t *sensor_data, uint16_t remote_id = NULL);
+    static int getAllSensorData(sensor_data_t *sensor_data, uint16_t remote_id = 0);
 
     /**
     * Obtain the atmospheric pressure in Pascal.
@@ -1478,7 +1478,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int getPressure_Pa(float32_t *pressure, uint16_t remote_id = NULL);
+    static int getPressure_Pa(float32_t *pressure, uint16_t remote_id = 0);
 
     /**
     * Obtain the max linear acceleration
@@ -1492,7 +1492,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int getMaxLinearAcceleration(uint16_t *max_lin_acc, uint16_t remote_id = NULL);
+    static int getMaxLinearAcceleration(uint16_t *max_lin_acc, uint16_t remote_id = 0);
 
     /**
     * Obtain the 3D acceleration vector in mg.
@@ -1506,7 +1506,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int getAcceleration_mg(acceleration_t *acceleration, uint16_t remote_id = NULL);
+    static int getAcceleration_mg(acceleration_t *acceleration, uint16_t remote_id = 0);
 
     /**
     * Obtain the 3D magnetic field strength vector in µTesla.
@@ -1520,7 +1520,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int getMagnetic_uT(magnetic_t *magnetic, uint16_t remote_id = NULL);
+    static int getMagnetic_uT(magnetic_t *magnetic, uint16_t remote_id = 0);
 
     /**
     * Obtain the 3D angular velocity vector degrees per second.
@@ -1534,7 +1534,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int getAngularVelocity_dps(angular_vel_t *angular_vel, uint16_t remote_id = NULL);
+    static int getAngularVelocity_dps(angular_vel_t *angular_vel, uint16_t remote_id = 0);
 
     /**
     * Obtain the orientation in Euler angles in degrees.
@@ -1547,7 +1547,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int getEulerAngles_deg(euler_angles_t *euler_angles, uint16_t remote_id = NULL);
+    static int getEulerAngles_deg(euler_angles_t *euler_angles, uint16_t remote_id = 0);
 
     /**
     * Obtain the orientation in quaternions.
@@ -1561,7 +1561,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int getQuaternion(quaternion_t *quaternion, uint16_t remote_id = NULL);
+    static int getQuaternion(quaternion_t *quaternion, uint16_t remote_id = 0);
 
     /**
     * Obtain the 3D linear acceleration in mg.
@@ -1577,7 +1577,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int getLinearAcceleration_mg(linear_acceleration_t *linear_acceleration, uint16_t remote_id = NULL);
+    static int getLinearAcceleration_mg(linear_acceleration_t *linear_acceleration, uint16_t remote_id = 0);
 
     /**
     * Obtain the 3D gravity vector in mg.
@@ -1591,7 +1591,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int getGravityVector_mg(gravity_vector_t *gravity_vector, uint16_t remote_id = NULL);
+    static int getGravityVector_mg(gravity_vector_t *gravity_vector, uint16_t remote_id = 0);
 
     /**
     * Obtain the temperature in degrees Celcius.
@@ -1605,7 +1605,7 @@ public:
     * @retval #POZYX_FAILURE function failed.
     * @retval #POZYX_TIMEOUT function timed out, no response received.
     */
-    static int getTemperature_c(float32_t *temperature, uint16_t remote_id = NULL);
+    static int getTemperature_c(float32_t *temperature, uint16_t remote_id = 0);
 
 /** @}*/
 
@@ -1739,7 +1739,7 @@ public:
     *
     * @see doRanging, doRemoteRanging
     */
-    static int getDeviceRangeInfo(uint16_t device_id, device_range_t *device_range, uint16_t remote_id = NULL);
+    static int getDeviceRangeInfo(uint16_t device_id, device_range_t *device_range, uint16_t remote_id = 0);
 
 /** @}*/
 
@@ -1759,7 +1759,7 @@ public:
     *
     * @see doDiscovery, doAnchorCalibration
     */
-    static int getDeviceListSize(uint8_t *device_list_size, uint16_t remote_id = NULL);
+    static int getDeviceListSize(uint8_t *device_list_size, uint16_t remote_id = 0);
 
 
     /**
@@ -1773,7 +1773,7 @@ public:
     * @retval #POZYX_SUCCESS success.
     * @retval #POZYX_FAILURE function failed.
     */
-    static int getDeviceIds(uint16_t devices[], int size, uint16_t remote_id = NULL);
+    static int getDeviceIds(uint16_t devices[], int size, uint16_t remote_id = 0);
 
     /**
     * Obtain the network IDs from all the anchors in the device list.
@@ -1786,7 +1786,7 @@ public:
     * @retval #POZYX_SUCCESS success.
     * @retval #POZYX_FAILURE function failed.
     */
-    static int getAnchorIds(uint16_t anchors[], int size, uint16_t remote_id = NULL);
+    static int getAnchorIds(uint16_t anchors[], int size, uint16_t remote_id = 0);
 
     /**
     * Obtain the network IDs from all the tags in the device list.
@@ -1799,7 +1799,7 @@ public:
     * @retval #POZYX_SUCCESS success.
     * @retval #POZYX_FAILURE function failed.
     */
-    static int getTagIds(uint16_t tags[], int size, uint16_t remote_id = NULL);
+    static int getTagIds(uint16_t tags[], int size, uint16_t remote_id = 0);
 
     /**
     * Discover Pozyx devices in range.
@@ -1838,7 +1838,7 @@ public:
     * @retval #POZYX_SUCCESS success.
     * @retval #POZYX_FAILURE function failed.
     */
-    static int doAnchorCalibration(int dimension = POZYX_2D, int num_measurements = 10, int num_anchors = 0, uint16_t anchors[] = NULL,  int32_t heights[] = NULL);
+    static int doAnchorCalibration(int dimension = POZYX_2D, int num_measurements = 10, int num_anchors = 0, uint16_t anchors[] = 0,  int32_t heights[] = 0);
 
     /**
     * Empty the internal list of devices.
@@ -1849,7 +1849,7 @@ public:
     * @retval #POZYX_SUCCESS success.
     * @retval #POZYX_FAILURE function failed.
     */
-    static int clearDevices(uint16_t remote_id = NULL);
+    static int clearDevices(uint16_t remote_id = 0);
 
     /**
     * Manualy adds a device to the device list.
@@ -1862,7 +1862,7 @@ public:
     * @retval #POZYX_SUCCESS success.
     * @retval #POZYX_FAILURE function failed.
     */
-    static int addDevice(device_coordinates_t device_coordinates, uint16_t remote_id = NULL);
+    static int addDevice(device_coordinates_t device_coordinates, uint16_t remote_id = 0);
 
     /**
     * Retrieve the stored coordinates of a device.
@@ -1875,7 +1875,7 @@ public:
     * @retval #POZYX_SUCCESS success.
     * @retval #POZYX_FAILURE function failed.
     */
-    static int getDeviceCoordinates(uint16_t device_id, coordinates_t *coordinates, uint16_t remote_id = NULL);
+    static int getDeviceCoordinates(uint16_t device_id, coordinates_t *coordinates, uint16_t remote_id = 0);
 
 /** @}*/
 

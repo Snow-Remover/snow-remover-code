@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 // change this if you want to perform remote configuration 
-uint16_t remote_id = NULL;
+uint16_t remote_id = 0;
 
 #define MAX_DEVICES                20
 uint8_t devlist_size = 0;
@@ -19,7 +19,7 @@ void setup() {
   Serial.println("\n\nAnchor configurator started.");
   Serial.println("------------------------------------");
   
-  if(remote_id == NULL) {
+  if(remote_id == 0) {
     Serial.print(F("Configuring the local pozyx device with network id: 0x"));
     uint16_t netid = 0;
     Pozyx.getNetworkId(&netid);

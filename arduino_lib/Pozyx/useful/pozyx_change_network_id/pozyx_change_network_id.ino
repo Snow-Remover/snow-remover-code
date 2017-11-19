@@ -13,7 +13,7 @@ void setup(){
   Serial.println(new_id, HEX);
 
   if (!remote){
-    remote_id = NULL;
+    remote_id = 0;
   }
   
   if(Pozyx.begin() == POZYX_FAILURE){

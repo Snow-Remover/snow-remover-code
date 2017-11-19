@@ -44,7 +44,7 @@ void setup()
   }
 
   if(!remote)
-    remote_id = NULL;
+    remote_id = 0;
   
   last_millis = millis();
   delay(10);  

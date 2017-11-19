@@ -16,7 +16,7 @@ int PozyxClass::getRead(uint8_t reg_address, uint8_t *pData, int size, uint16_t 
 {
   assert (pData != NULL);
 
-  if (remote_id == NULL){
+  if (remote_id == 0){
     return regRead(reg_address, pData, size);
   }
   else{
@@ -26,7 +26,7 @@ int PozyxClass::getRead(uint8_t reg_address, uint8_t *pData, int size, uint16_t 
 
 int PozyxClass::setWrite(uint8_t reg_address, uint8_t *pData, int size, uint16_t remote_id)
 {
-  if (remote_id == NULL){
+  if (remote_id == 0){
     return regWrite(reg_address, pData, size);
     delay(POZYX_DELAY_LOCAL_WRITE);
   }
@@ -38,7 +38,7 @@ int PozyxClass::setWrite(uint8_t reg_address, uint8_t *pData, int size, uint16_t
 
 int PozyxClass::useFunction(uint8_t reg_address, uint8_t *params, int param_size, uint8_t *pData, int size, uint16_t remote_id)
 {
-  if (remote_id == NULL){
+  if (remote_id == 0){
     return regFunction(reg_address, params, param_size, pData, size);
   }
   else{
@@ -287,7 +287,7 @@ int PozyxClass::setUWBSettings(UWB_settings_t *UWB_settings, uint16_t remote_id)
   }
 
   // afterwards, it is possible to set the gain to a custom value
-  if (remote_id == NULL){
+  if (remote_id == 0){
     return setTxPower(UWB_settings->gain_db);
   }else{
     UWB_settings_t local_settings;
@@ -626,7 +626,7 @@ int PozyxClass::setGPIO(int gpio_num, uint8_t value, uint16_t remote_id)
 void PozyxClass::resetSystem(uint16_t remote_id)
 {
   useFunction(POZYX_RESET_SYS, NULL, 0, NULL, 0, remote_id);
-  if(remote_id == NULL){
+  if(remote_id == 0){
     delay(1000);
   }
   // remove the delay here if you want the freedom
@@ -1207,7 +1207,7 @@ int PozyxClass::saveConfiguration(int type, uint8_t registers[], int num_registe
   params[0] = type;
   memcpy(params+1, registers, num_registers);
 
-  if(remote_id == NULL){
+  if(remote_id == 0){
     // trigger the register function to save
     uint8_t int_status = 0;
     regRead(POZYX_INT_STATUS, &int_status, 1);      // first clear out the interrupt status register by reading from it
@@ -1264,7 +1264,7 @@ int PozyxClass::saveUWBSettings(uint16_t remote_id)
 int PozyxClass::clearConfiguration(uint16_t remote_id)
 {
   int status;
-  if(remote_id == NULL){
+  if(remote_id == 0){
 
     uint8_t int_status = 0;
     regRead(POZYX_INT_STATUS, &int_status, 1);      // first clear out the interrupt status register by reading from it

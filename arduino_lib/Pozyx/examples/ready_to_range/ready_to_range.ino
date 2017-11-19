@@ -39,7 +39,7 @@ void setup(){
   }
   // setting the remote_id back to NULL will use the local Pozyx
   if (!remote){
-    remote_id = NULL;
+    remote_id = 0;
   }
   Serial.println("------------POZYX RANGING V1.1------------");
   Serial.println("NOTES:");

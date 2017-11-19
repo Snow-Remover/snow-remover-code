@@ -26,7 +26,7 @@ void setup(){
 void device_check(uint16_t remote_id){
   uint8_t data[5] = {0,0,0,0,0};
 
-  if (remote_id == NULL){
+  if (remote_id == 0){
     Pozyx.regRead(POZYX_WHO_AM_I, data, 5);
     Serial.println("local device:");
   }else{

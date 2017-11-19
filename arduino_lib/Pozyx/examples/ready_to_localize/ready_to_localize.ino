@@ -46,7 +46,7 @@ void setup(){
   }
 
   if(!remote){
-    remote_id = NULL;
+    remote_id = 0;
   }
 
   Serial.println(F("----------POZYX POSITIONING V1.1----------"));
@@ -94,7 +94,7 @@ void loop(){
 // prints the coordinates for either humans or for processing
 void printCoordinates(coordinates_t coor){
   uint16_t network_id = remote_id;
-  if (network_id == NULL){
+  if (network_id == 0){
     network_id = 0;
   }
   if(!use_processing){
@@ -121,7 +121,7 @@ void printCoordinates(coordinates_t coor){
 // error printing function for debugging
 void printErrorCode(String operation){
   uint8_t error_code;
-  if (remote_id == NULL){
+  if (remote_id == 0){
     Pozyx.getErrorCode(&error_code);
     Serial.print("ERROR ");
     Serial.print(operation);
