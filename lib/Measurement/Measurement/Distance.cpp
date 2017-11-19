@@ -25,6 +25,14 @@ namespace Measurement
   }
   
   
+  Distance Distance::from_millimeters(const float millimeters)
+  {
+    Distance new_distance;
+    new_distance._set_millimeters(millimeters);
+    return new_distance;
+  }
+  
+  
   Distance Distance::zero()
   {
     return Distance();
@@ -49,6 +57,12 @@ namespace Measurement
   }
   
   
+  float Distance::millimeters() const
+  {
+    return _meters * 1000.0;
+  }
+  
+  
   Distance Distance::absolute() const
   {
     return Distance::from_meters(abs(meters()));
@@ -65,6 +79,12 @@ namespace Measurement
   {
     _set_meters(meters() + other_distance.meters());
     return *this;
+  }
+  
+  
+  Distance Distance::operator-()
+  {
+    return Distance::from_meters(-meters());
   }
   
   
@@ -163,6 +183,12 @@ namespace Measurement
   void Distance::_set_centimeters(float centimeters)
   {
     _set_meters(centimeters / 100.0);
+  }
+  
+  
+  void Distance::_set_millimeters(float millimeters)
+  {
+    _set_meters(millimeters / 1000.0);
   }
   
   
