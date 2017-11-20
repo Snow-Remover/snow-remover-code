@@ -50,6 +50,10 @@ namespace Robot
           .to_angle_between(Measurement::Angle::from_revolutions(-0.5), Measurement::Angle::from_revolutions(0.5));
         Serial.println(error.degrees());
         float motor_input = error.degrees() * 10;
+        if (motor_input > 100.0)
+          motor_input = 100.0;
+        else if (motor_input < -100.0)
+          motor_input = -100.0;
         MotorMixer::set_left_rotation_input(motor_input);
         MotorMixer::set_right_rotation_input(-motor_input);
       }
