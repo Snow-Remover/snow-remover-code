@@ -13,6 +13,7 @@ void setup()
   Serial.begin(9600);
   Serial.println("begin...");
   Robot::Main::setup();
+
   Robot::Main::start();
 }
 

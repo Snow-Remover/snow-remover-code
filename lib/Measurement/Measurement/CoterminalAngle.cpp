@@ -47,6 +47,7 @@ namespace Measurement
     if ((end_angle - start_angle) != Angle::revolution())
     {
       // range is invalid
+      Serial.println("Error in Measurement::CoterminalAngle::to_angle_between, range is invalid.");
       end();
     }
     Angle this_angle = to_angle();

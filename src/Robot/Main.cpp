@@ -7,23 +7,23 @@ namespace Robot
   void Main::setup()
   {
     Hardware::Main::setup();
+    Navigation::Main::setup();
     Vision::setup();
-    Navigation::setup();
   }
   
   
   void Main::start()
   {
-    //Vision::start();
-    //Navigation::start();
+    Navigation::Main::start();
+    Vision::start();
   }
   
   
   void Main::tick()
   {
     Hardware::Main::tick();
+    Navigation::Main::tick();
     Vision::tick();
-    Navigation::tick();
   }
   
 }

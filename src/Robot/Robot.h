@@ -11,9 +11,9 @@
 #include "PeriodicTimer.h"
 
 #include "Hardware/Hardware.h"
+#include "Navigation/Navigation.h"
 
 #include "Vision.h"
-#include "Navigation.h"
 #include "Main.h"
 
 

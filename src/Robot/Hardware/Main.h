@@ -14,6 +14,8 @@ namespace Robot
       
       static AdafruitMotorShield::Shield motor_shield;
       static StepperMotor lidar_stepper_motor;
+      static DCMotor left_track_motor;
+      static DCMotor right_track_motor;
       static ServoMotor plow_servo_motor;
       static LIDARSensor lidar_sensor;
       
