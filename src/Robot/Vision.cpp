@@ -38,7 +38,7 @@ namespace Robot
 
     if (motor->is_stopped()) {
 
-      int temp_distance = sensor->distance();
+      unsigned int temp_distance = sensor->distance();
       if (temp_distance < _obj_distance) {
         _obj_distance = temp_distance;
       }
