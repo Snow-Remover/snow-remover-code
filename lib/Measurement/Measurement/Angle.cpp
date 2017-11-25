@@ -49,10 +49,4 @@ namespace Measurement
   }
   
   
-  void Angle::_set_revolutions(float revolutions)
-  {
-    _set_degrees(revolutions * 360.0);
-  }
-  
-  
 }

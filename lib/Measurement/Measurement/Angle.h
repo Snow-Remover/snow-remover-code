@@ -23,7 +23,6 @@ namespace Measurement
     
     Comparable<Angle>::Comparison _compare_with(const Angle other_angle) const;
     void _set_degrees(float degrees);
-    void _set_revolutions(float revolutions);
     
   };
   

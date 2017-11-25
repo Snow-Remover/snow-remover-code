@@ -6,9 +6,13 @@
 #include "NativeExtensions.h"
 #include "Comparable.h"
 
-// arduino library implements degrees(rad) as a macro, eww
+// arduino library implements some macros that make a mess
+// undefine them here
 #ifdef degrees
 #undef degrees
+#endif
+#ifdef radians
+#undef radians
 #endif
 
 #include "Measurement/BaseAngle.h"

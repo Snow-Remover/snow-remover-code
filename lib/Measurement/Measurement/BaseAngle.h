@@ -15,12 +15,14 @@ namespace Measurement
     public:
     
     static AnyAngle from_degrees(const float degrees);
+    static AnyAngle from_radians(const float radians);
     static AnyAngle from_revolutions(const float revolutions);
     static AnyAngle zero();
     
     BaseAngle();
     
     float degrees() const;
+    float radians() const;
     float revolutions() const;
     Angle to_angle() const;
     CoterminalAngle to_coterminal_angle() const;
@@ -47,7 +49,8 @@ namespace Measurement
     float _degrees;
     
     virtual void _set_degrees(const float degrees);
-    virtual void _set_revolutions(const float revolutions);
+    void _set_radians(const float radians);
+    void _set_revolutions(const float revolutions);
     
   };
   

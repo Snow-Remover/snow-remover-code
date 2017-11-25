@@ -96,10 +96,4 @@ namespace Measurement
   }
   
   
-  void CoterminalAngle::_set_revolutions(const float revolutions)
-  {
-    _set_degrees(revolutions * 360.0);
-  }
-  
-  
 }

@@ -35,7 +35,6 @@ namespace Measurement
     
     void _clean(); // ensure angle is only between 0 and 360 degress
     void _set_degrees(const float degrees);
-    void _set_revolutions(const float revolutions);
     
   };
   

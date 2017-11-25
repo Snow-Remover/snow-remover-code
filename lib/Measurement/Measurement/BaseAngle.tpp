@@ -17,6 +17,15 @@ namespace Measurement
   
   
   template <class AnyAngle>
+  AnyAngle BaseAngle<AnyAngle>::from_radians(const float radians)
+  {
+    AnyAngle new_angle;
+    new_angle._set_radians(radians);
+    return new_angle;
+  }
+  
+  
+  template <class AnyAngle>
   AnyAngle BaseAngle<AnyAngle>::from_revolutions(const float revolutions)
   {
     AnyAngle new_angle;
@@ -43,6 +52,13 @@ namespace Measurement
   float BaseAngle<AnyAngle>::degrees() const
   {
     return _degrees;
+  }
+  
+  
+  template <class AnyAngle>
+  float BaseAngle<AnyAngle>::radians() const
+  {
+    return _degrees * (M_PI / 180.0);
   }
   
   
@@ -164,6 +180,20 @@ namespace Measurement
   //
   // private
   //
+  
+  
+  template <class AnyAngle>
+  void BaseAngle<AnyAngle>::_set_radians(const float radians)
+  {
+    _set_degrees(radians * (180.0 / M_PI));
+  }
+  
+  
+  template <class AnyAngle>
+  void BaseAngle<AnyAngle>::_set_revolutions(const float revolutions)
+  {
+    _set_degrees(revolutions * 360.0);
+  }
   
   
 }
