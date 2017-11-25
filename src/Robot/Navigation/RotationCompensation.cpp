@@ -18,27 +18,30 @@ namespace Robot
     }
     
     
-    void RotationCompensation::setup()
-    {
-      _target_angle = _current_angle();
-    }
-    
-    
-    void RotationCompensation::set_target(Measurement::CoterminalAngle angle)
-    {
-      _target_angle = angle;
-    }
-    
-    
     boolean RotationCompensation::is_compete()
     {
-      Measurement::CoterminalAngle tolerance = Measurement::CoterminalAngle::from_degrees(5.0);
-      return _current_angle().is_between(_target_angle - tolerance, _target_angle + tolerance);
+      Measurement::CoterminalAngle tolerance = Measurement::CoterminalAngle::from_degrees(10.0);
+      return _current_heading().is_between(_target_heading - tolerance, _target_heading + tolerance);
     }
     
     
-    void RotationCompensation::tick()
+    void RotationCompensation::set_target(Measurement::CoterminalAngle heading)
     {
+      _target_heading = heading;
+    }
+    
+    
+    void RotationCompensation::setup()
+    {
+      _target_heading = _current_heading();
+    }
+    
+    
+    void RotationCompensation::update()
+    {
+      //Serial.print("target_heading: ");
+      //Serial.print(_target_heading.degrees());
+      //Serial.println();
       if (is_compete())
       {
         MotorMixer::set_left_rotation_input(0.0);
@@ -46,9 +49,11 @@ namespace Robot
       }
       else
       {
-        Measurement::Angle error = (_target_angle - _current_angle())
+        Measurement::Angle error = (_target_heading - _current_heading())
           .to_angle_between(Measurement::Angle::from_revolutions(-0.5), Measurement::Angle::from_revolutions(0.5));
-        Serial.println(error.degrees());
+        //Serial.print("heading error: ");
+        //Serial.print(error.degrees());
+        //Serial.println();
         float motor_input = error.degrees() * 10;
         if (motor_input > 100.0)
           motor_input = 100.0;
@@ -65,12 +70,12 @@ namespace Robot
     //
     
     
-    Measurement::CoterminalAngle RotationCompensation::_target_angle;
+    Measurement::CoterminalAngle RotationCompensation::_target_heading;
     
     
-    Measurement::CoterminalAngle RotationCompensation::_current_angle()
+    Measurement::CoterminalAngle RotationCompensation::_current_heading()
     {
-      return Positioning::get().angle();
+      return Positioning::get().heading();
     }
     
   }

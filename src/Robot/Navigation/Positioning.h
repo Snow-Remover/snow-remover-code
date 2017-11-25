@@ -11,13 +11,14 @@ namespace Robot
     {
       
       public:
-      
+
       static Position get();
-      
       static void setup();
+      static void update();
       
       private:
       
+      static Position _position;
       static const uint8_t _num_anchors;                                    // the number of anchors
       static uint16_t _anchors[];     // the network id of the anchors: change these to the network ids of your anchors.
       static int32_t _anchors_x[];               // anchor x-coorindates in mm
@@ -27,6 +28,7 @@ namespace Robot
       static uint8_t _dimension;                           // positioning dimension
       static int32_t _height;                                  // height of device, required in 2.5D positioning
       
+      static Position _get();
       static void _set_anchors_manual(); // function to manually set the anchor coordinates
       
     };

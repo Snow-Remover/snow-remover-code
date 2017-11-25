@@ -13,17 +13,18 @@ namespace Robot
       public:
       
       static void freeze();
-      static void setup();
-      static void set_target(Location location);
       static boolean is_compete();
-      static void tick();
+      static void set_target(Location location);
+      static void setup();
+      static void update();
       
       private:
       
-      static Location _last_location;
-      static Location _target_location;
+      static Geometry::Point _start_point;
+      static Geometry::Point _finish_point;
+      static boolean _complete;
       
-      static Location _current_location();
+      static Geometry::Point _robot_point();
       
     };
     

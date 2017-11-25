@@ -15,15 +15,15 @@ namespace Robot
     {
       _x = Measurement::Distance::zero();
       _y = Measurement::Distance::zero();
-      _angle = Measurement::CoterminalAngle::zero();
+      _heading = Measurement::CoterminalAngle::zero();
     }
     
     
-    Position::Position(const Measurement::Distance x, const Measurement::Distance y, const Measurement::CoterminalAngle angle)
+    Position::Position(const Measurement::Distance x, const Measurement::Distance y, const Measurement::CoterminalAngle heading)
     {
       _x = x;
       _y = y;
-      _angle = angle;
+      _heading = heading;
     }
     
     
@@ -45,9 +45,9 @@ namespace Robot
     }
     
     
-    const Measurement::CoterminalAngle Position::angle() const
+    const Measurement::CoterminalAngle Position::heading() const
     {
-      return _angle;
+      return _heading;
     }
     
     

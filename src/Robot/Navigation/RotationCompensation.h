@@ -13,16 +13,16 @@ namespace Robot
       public:
       
       static void freeze();
-      static void set_target(Measurement::CoterminalAngle angle);
-      static void setup();
       static boolean is_compete();
-      static void tick();
+      static void set_target(Measurement::CoterminalAngle heading);
+      static void setup();
+      static void update();
       
       private:
       
-      static Measurement::CoterminalAngle _target_angle;
+      static Measurement::CoterminalAngle _target_heading;
       
-      static Measurement::CoterminalAngle _current_angle();
+      static Measurement::CoterminalAngle _current_heading();
       
     };
     

@@ -13,37 +13,40 @@ namespace Robot
     
     void MotorMixer::set_left_translation_input(float speed)
     {
-      DCMotor* motor = &Hardware::Main::left_track_motor;
       _left_translation_input = speed;
-      float output = _speed_scaling * ((_left_translation_input + _left_rotation_input) / 2);
-      motor->run(output);
     }
     
     
     void MotorMixer::set_right_translation_input(float speed)
     {
-      DCMotor* motor = &Hardware::Main::right_track_motor;
       _right_translation_input = speed;
-      float output = _speed_scaling * ((_right_translation_input + _right_rotation_input) / 2);
-      motor->run(output);
     }
     
     
     void MotorMixer::set_left_rotation_input(float speed)
     {
-      DCMotor* motor = &Hardware::Main::left_track_motor;
       _left_rotation_input = speed;
-      float output = _speed_scaling * ((_left_translation_input + _left_rotation_input) / 2);
-      motor->run(output);
     }
     
     
     void MotorMixer::set_right_rotation_input(float speed)
     {
-      DCMotor* motor = &Hardware::Main::right_track_motor;
       _right_rotation_input = speed;
-      float output = _speed_scaling * ((_right_translation_input + _right_rotation_input) / 2);
-      motor->run(output);
+    }
+    
+    
+    void MotorMixer::update()
+    {
+      DCMotor* left_motor = &Hardware::Main::left_track_motor;
+      DCMotor* right_motor = &Hardware::Main::right_track_motor;
+      float left_output = _speed_scaling * ((_left_translation_input + _left_rotation_input) / 2);
+      float right_output = _speed_scaling * ((_right_translation_input + _right_rotation_input) / 2);
+      left_motor->run(left_output);
+      right_motor->run(right_output);
+      //Serial.print("left motor: ");
+      //Serial.println(left_output);
+      //Serial.print("right motor: ");
+      //Serial.println(right_output);
     }
     
     
@@ -52,7 +55,7 @@ namespace Robot
     //
     
     
-    const float MotorMixer::_speed_scaling = 0.5;
+    const float MotorMixer::_speed_scaling = 1;
     float MotorMixer::_left_translation_input = 0.0;
     float MotorMixer::_right_translation_input = 0.0;
     float MotorMixer::_left_rotation_input = 0.0;

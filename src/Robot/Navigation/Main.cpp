@@ -30,6 +30,7 @@ namespace Robot
     {
       if (_tick_timer.is_complete())
       {
+        Serial.println(">");
         if (Vision::closest_obj() <= 100)
           _freeze();
         else
@@ -56,8 +57,11 @@ namespace Robot
     
     void Main::_move()
     {
-      RotationCompensation::tick();
-      //TranslationCompensation::tick();
+      // preserve order of these, Translation sets target of Rotation
+      Positioning::update();
+      TranslationCompensation::update();
+      RotationCompensation::update();
+      MotorMixer::update();
     }
     
     

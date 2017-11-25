@@ -8,6 +8,7 @@
 
 #include "NativeExtensions.h"
 #include "Measurement.h"
+#include "Geometry.h"
 #include "Math.h"
 #include "Timer.h"
 #include "PeriodicTimer.h"

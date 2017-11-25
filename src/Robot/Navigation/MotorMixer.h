@@ -16,6 +16,7 @@ namespace Robot
       static void set_right_translation_input(float speed);
       static void set_left_rotation_input(float speed);
       static void set_right_rotation_input(float speed);
+      static void update();
       
       private:
       
