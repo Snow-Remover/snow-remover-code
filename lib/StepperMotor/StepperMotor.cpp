@@ -153,17 +153,23 @@ void StepperMotor::rotate_to(const long step, const Measurement::AngularVelocity
 }
 
 
-void StepperMotor::stop()
+boolean StepperMotor::setup()
 {
-  _desired_step = _current_step;
-  _desired_angle = Measurement::Angle::from_revolutions((float)_desired_step / _revolution_step_count);
-  _infinite_rotation = false;
+  return _motor != NULL;
 }
 
 
 long StepperMotor::step()
 {
   return _current_step;
+}
+
+
+void StepperMotor::stop()
+{
+  _desired_step = _current_step;
+  _desired_angle = Measurement::Angle::from_revolutions((float)_desired_step / _revolution_step_count);
+  _infinite_rotation = false;
 }
 
 

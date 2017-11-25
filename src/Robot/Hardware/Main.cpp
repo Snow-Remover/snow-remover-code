@@ -17,8 +17,23 @@ namespace Robot
     void Main::setup()
     {
       motor_shield.begin();
-      plow_servo_motor.setup();
+      if (!lidar_stepper_motor.setup())
+      {
+        Serial.println("ERROR seting up lidar_stepper_motor.");
+        end();
+      }
       lidar_sensor.setup();
+      if (!left_track_motor.setup())
+      {
+        Serial.println("ERROR seting up left_track_motor.");
+        end();
+      }
+      if (!right_track_motor.setup())
+      {
+        Serial.println("ERROR seting up right_track_motor.");
+        end();
+      }
+      plow_servo_motor.setup();
     }
 
 

@@ -6,12 +6,18 @@
 //
 
 
-DCMotor::DCMotor(AdafruitMotorShield::DCMotor* motor, boolean invert_direction = false)
+DCMotor::DCMotor(AdafruitMotorShield::DCMotor* motor, boolean invert_direction)
 {
   _motor = motor;
   _is_direction_inverted = invert_direction;
   
   _speed = 0.0;
+}
+
+
+void DCMotor::brake()
+{
+  _motor->set_speed(0);
 }
 
 
@@ -45,15 +51,15 @@ void DCMotor::run(float speed)
 }
 
 
-float DCMotor::speed()
+boolean DCMotor::setup()
 {
-  return _speed;
+  return _motor != NULL;
 }
 
 
-void DCMotor::brake()
+float DCMotor::speed()
 {
-  _motor->set_speed(0);
+  return _speed;
 }
 
 

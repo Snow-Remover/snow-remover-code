@@ -14,6 +14,7 @@
 #include <Arduino.h>
 #include <Wire.h>
 
+#include "NativeExtensions.h"
 #include "Math.h"
 #include "AdafruitMotorShield.h"
 #include "PeriodicTimer.h"
@@ -41,8 +42,9 @@ class StepperMotor
   void rotate(const long steps, const Measurement::AngularVelocity angular_velocity);
   void rotate_to(const Measurement::Angle angle, const Measurement::AngularVelocity angular_velocity);
   void rotate_to(const long step, const Measurement::AngularVelocity angular_velocity);
-  void stop();
+  boolean setup();
   long step();
+  void stop();
   void tick();
   
   private:
