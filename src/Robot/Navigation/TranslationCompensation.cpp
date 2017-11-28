@@ -11,23 +11,20 @@ namespace Robot
     //
     
     
-    void TranslationCompensation::freeze()
-    {
-      MotorMixer::set_left_translation_input(0.0);
-      MotorMixer::set_right_translation_input(0.0);
-    }
-    
-    
-    boolean TranslationCompensation::is_compete() // crossed finish line?
+    boolean TranslationCompensation::is_complete() // crossed finish line?
     {
       if (!_complete)
       {
-        if (_start_point == _finish_point) return true;
-        Geometry::Line trajectory = Geometry::Line::from_points(_start_point, _finish_point);
-        Geometry::Line finish_line = trajectory.perpendicular_through(_finish_point);
-        Geometry::Line::Side side_of_start = finish_line.get_side_of(_start_point);
-        Geometry::Line::Side side_of_robot = finish_line.get_side_of(_robot_point());
-        _complete = side_of_start != side_of_robot;
+        if (_start_point == _finish_point)
+          _complete = true;
+        else
+        {
+          Geometry::Line trajectory = Geometry::Line::from_points(_start_point, _finish_point);
+          Geometry::Line finish_line = trajectory.perpendicular_through(_finish_point);
+          Geometry::Line::Side side_of_start = finish_line.get_side_of(_start_point);
+          Geometry::Line::Side side_of_robot = finish_line.get_side_of(_robot_point());
+          _complete = side_of_start != side_of_robot;
+        }
       }
       return _complete;
     }
@@ -37,6 +34,7 @@ namespace Robot
     {
       _start_point = _finish_point;
       _finish_point = Geometry::Point(location.x().meters(), location.y().meters());
+      _complete = false;
     }
     
     
@@ -46,11 +44,48 @@ namespace Robot
       //_start_point = Geometry::Point(0.0, 0.8);;
       //_finish_point = _start_point;
       _finish_point = Geometry::Point(0.8, 0.8);
+      _adjustment_timer.reset();
+      _complete_timer.reset();
       _complete = false;
     }
     
     
-    void TranslationCompensation::update()
+    void TranslationCompensation::tick()
+    {
+      if (_adjustment_timer.is_complete())
+      {
+        _adjustment_update();
+        _adjustment_timer.increment_interval();
+      }
+      if (_complete_timer.is_complete())
+      {
+        _complete_update();
+        _complete_timer.increment_interval();
+      }
+    }
+    
+    
+    //
+    // private
+    //
+    
+    
+    PeriodicTimer TranslationCompensation::_adjustment_timer = PeriodicTimer(500, PeriodicTimer::Units::Milliseconds);
+    PeriodicTimer TranslationCompensation::_complete_timer = PeriodicTimer(200, PeriodicTimer::Units::Milliseconds);
+    Geometry::Point TranslationCompensation::_start_point;
+    Geometry::Point TranslationCompensation::_finish_point;
+    boolean TranslationCompensation::_complete;
+    
+    
+    Geometry::Point TranslationCompensation::_robot_point()
+    {
+      Location location = Positioning::get().location();
+      return Geometry::Point(location.x().meters(), location.y().meters());
+      //return Geometry::Point(0, 0.4);
+    }
+    
+    
+    void TranslationCompensation::_adjustment_update()
     {
       if (_start_point != _finish_point)
       {
@@ -102,8 +137,12 @@ namespace Robot
         Measurement::CoterminalAngle rotate_heading_target = Measurement::CoterminalAngle::from_degrees(90.0) - rotate_angle_target;
         RotationCompensation::set_target(rotate_heading_target);
       }
-      
-      if (is_compete())
+    }
+    
+    
+    void TranslationCompensation::_complete_update()
+    {
+      if (is_complete())
       {
         MotorMixer::set_left_translation_input(0.0);
         MotorMixer::set_right_translation_input(0.0);
@@ -115,22 +154,6 @@ namespace Robot
       }
     }
     
-    
-    //
-    // private
-    //
-    
-    
-    Geometry::Point TranslationCompensation::_start_point;
-    Geometry::Point TranslationCompensation::_finish_point;
-    boolean TranslationCompensation::_complete;
-    
-    Geometry::Point TranslationCompensation::_robot_point()
-    {
-      Location location = Positioning::get().location();
-      return Geometry::Point(location.x().meters(), location.y().meters());
-      //return Geometry::Point(0, 0.4);
-    }
     
   }
 } 

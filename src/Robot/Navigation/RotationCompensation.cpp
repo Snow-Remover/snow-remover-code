@@ -11,14 +11,7 @@ namespace Robot
     //
     
     
-    void RotationCompensation::freeze()
-    {
-      MotorMixer::set_left_rotation_input(0.0);
-      MotorMixer::set_right_rotation_input(0.0);
-    }
-    
-    
-    boolean RotationCompensation::is_compete()
+    boolean RotationCompensation::is_complete()
     {
       Measurement::CoterminalAngle tolerance = Measurement::CoterminalAngle::from_degrees(10.0);
       return _current_heading().is_between(_target_heading - tolerance, _target_heading + tolerance);
@@ -34,15 +27,41 @@ namespace Robot
     void RotationCompensation::setup()
     {
       _target_heading = _current_heading();
+      _update_timer.reset();
     }
     
     
-    void RotationCompensation::update()
+    void RotationCompensation::tick()
+    {
+      if (_update_timer.is_complete())
+      {
+        _update();
+        _update_timer.increment_interval();
+      }
+    }
+    
+    
+    //
+    // private
+    //
+    
+    
+    PeriodicTimer RotationCompensation::_update_timer = PeriodicTimer(200, PeriodicTimer::Units::Milliseconds);
+    Measurement::CoterminalAngle RotationCompensation::_target_heading;
+    
+    
+    Measurement::CoterminalAngle RotationCompensation::_current_heading()
+    {
+      return Positioning::get().heading();
+    }
+    
+    
+    void RotationCompensation::_update()
     {
       //Serial.print("target_heading: ");
       //Serial.print(_target_heading.degrees());
       //Serial.println();
-      if (is_compete())
+      if (is_complete())
       {
         MotorMixer::set_left_rotation_input(0.0);
         MotorMixer::set_right_rotation_input(0.0);
@@ -64,19 +83,6 @@ namespace Robot
       }
     }
     
-    
-    //
-    // private
-    //
-    
-    
-    Measurement::CoterminalAngle RotationCompensation::_target_heading;
-    
-    
-    Measurement::CoterminalAngle RotationCompensation::_current_heading()
-    {
-      return Positioning::get().heading();
-    }
     
   }
 } 

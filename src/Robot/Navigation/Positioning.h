@@ -14,10 +14,11 @@ namespace Robot
 
       static Position get();
       static void setup();
-      static void update();
+      static void tick();
       
       private:
       
+      static PeriodicTimer _update_timer;
       static Position _position;
       static const uint8_t _num_anchors;                                    // the number of anchors
       static uint16_t _anchors[];     // the network id of the anchors: change these to the network ids of your anchors.
@@ -30,7 +31,7 @@ namespace Robot
       
       static Position _get();
       static void _set_anchors_manual(); // function to manually set the anchor coordinates
-      
+      static void _update();
     };
     
   }  

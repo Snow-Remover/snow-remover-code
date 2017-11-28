@@ -18,10 +18,7 @@ namespace Robot
       
       private:
       
-      static PeriodicTimer _tick_timer;
-      
-      static void _freeze();
-      static void _move();
+      static PeriodicTimer _update_timer;
       
     };
     

@@ -12,17 +12,18 @@ namespace Robot
       
       public:
       
-      static void freeze();
-      static boolean is_compete();
+      static boolean is_complete();
       static void set_target(Measurement::CoterminalAngle heading);
       static void setup();
-      static void update();
+      static void tick();
       
       private:
       
+      static PeriodicTimer _update_timer;
       static Measurement::CoterminalAngle _target_heading;
       
       static Measurement::CoterminalAngle _current_heading();
+      static void _update();
       
     };
     

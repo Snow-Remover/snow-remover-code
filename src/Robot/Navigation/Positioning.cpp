@@ -36,13 +36,18 @@ namespace Robot
       //printCalibrationResult();
       delay(2000);
       
-      update();
+      _update_timer.reset();
+      _update();
     }
     
     
-    void Positioning::update()
+    void Positioning::tick()
     {
-      _position = _get();
+      if (_update_timer.is_complete())
+      {
+        _update();
+        _update_timer.increment_interval();
+      }
     }
     
     
@@ -51,6 +56,7 @@ namespace Robot
     //
     
     
+    PeriodicTimer Positioning::_update_timer = PeriodicTimer(250, PeriodicTimer::Units::Milliseconds);
     Position Positioning::_position;
     const uint8_t Positioning::_num_anchors = 4;  // must be 4 for now
     // y 151cm
@@ -59,11 +65,13 @@ namespace Robot
     // | 0x601B       0x6046
     // +----------------------x 216cm
     uint16_t Positioning::_anchors[_num_anchors] = {0x601B, 0x6046, 0x6032, 0x6035};
-    int32_t Positioning::_anchors_x[_num_anchors] = {0, 3300, 0, 3300};
-    int32_t Positioning::_anchors_y[_num_anchors] = {0, 0, 1500, 1500};
+    int32_t Positioning::_anchors_x[_num_anchors] = {0, 1830, 0, 1830};
+    int32_t Positioning::_anchors_y[_num_anchors] = {0, 0, 1210, 1210};
     int32_t Positioning::_heights[_num_anchors] = {0, 0, 0, 0};
-    uint8_t Positioning::_algorithm = POZYX_POS_ALG_UWB_ONLY;
-    uint8_t Positioning::_dimension = POZYX_2D;
+    //uint8_t Positioning::_algorithm = POZYX_POS_ALG_UWB_ONLY;
+    uint8_t Positioning::_algorithm = POZYX_POS_ALG_TRACKING;
+    //uint8_t Positioning::_dimension = POZYX_2D;
+    uint8_t Positioning::_dimension = POZYX_3D;
     int32_t Positioning::_height = 100;
     
     
@@ -117,6 +125,25 @@ namespace Robot
         anchor.pos.z = _heights[i];
         Pozyx.addDevice(anchor);
       }
+    }
+    
+    
+    void Positioning::_update()
+    {
+      //Measurement::Distance old_x = _position.x();
+      //Measurement::Distance old_y = _position.y();
+      
+      Position new_position = _get();
+      //Measurement::Distance new_x = new_position.x();
+      //Measurement::Distance new_y = new_position.y();
+      //Measurement::CoterminalAngle new_heading = new_position.heading();
+      
+      //Measurement::Distance filtered_x = old_x * 0.9 + new_x * 0.1;
+      //Measurement::Distance filtered_y = old_y * 0.9 + new_y * 0.1;
+      //Position filtered_position = Position(filtered_x, filtered_y, new_heading);
+      
+      //_position = filtered_position;
+      _position = new_position;
     }
     
   }

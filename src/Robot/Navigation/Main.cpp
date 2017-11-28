@@ -13,30 +13,30 @@ namespace Robot
     
     void Main::setup()
     {
-      _tick_timer.reset();
+      _update_timer.reset();
       Positioning::setup();
       RotationCompensation::setup();
       TranslationCompensation::setup();
+      MotorMixer::setup();
     }
     
     
     void Main::start()
     {
-      _tick_timer.reset();
+      _update_timer.reset();
     }
     
     
     void Main::tick()
     {
-      if (_tick_timer.is_complete())
-      {
-        Serial.println(">");
-        if (Vision::closest_obj() <= 30)
-          _freeze();
-        else
-          _move();
-        _tick_timer.increment_interval();
-      }
+      Positioning::tick();
+      RotationCompensation::tick();
+      TranslationCompensation::tick();
+      MotorMixer::tick();
+      //if (_update_timer.is_complete())
+      //{
+      //  _update_timer.increment_interval();
+      //}
     }
     
     
@@ -45,25 +45,23 @@ namespace Robot
     //
     
     
-    PeriodicTimer Main::_tick_timer = PeriodicTimer(250, PeriodicTimer::Units::Milliseconds);
+    PeriodicTimer Main::_update_timer = PeriodicTimer(1000, PeriodicTimer::Units::Milliseconds);
     
     
-    void Main::_freeze()
-    {
-      RotationCompensation::freeze();
-      TranslationCompensation::freeze();
-      MotorMixer::update();
-    }
+    //void Main::_freeze()
+    //{
+      //RotationCompensation::freeze();
+      //TranslationCompensation::freeze();
+    //}
     
     
-    void Main::_move()
-    {
-      // preserve order of these, Translation sets target of Rotation
-      Positioning::update();
-      TranslationCompensation::update();
-      RotationCompensation::update();
-      MotorMixer::update();
-    }
+    //void Main::_move()
+    //{
+      //// preserve order of these, Translation sets target of Rotation
+      ////Positioning::update();
+      //TranslationCompensation::update();
+      //RotationCompensation::update();
+    //}
     
     
   }

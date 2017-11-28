@@ -12,19 +12,22 @@ namespace Robot
       
       public:
       
-      static void freeze();
-      static boolean is_compete();
+      static boolean is_complete();
       static void set_target(Location location);
       static void setup();
-      static void update();
+      static void tick();
       
       private:
       
+      static PeriodicTimer _adjustment_timer;
+      static PeriodicTimer _complete_timer;
       static Geometry::Point _start_point;
       static Geometry::Point _finish_point;
       static boolean _complete;
       
       static Geometry::Point _robot_point();
+      static void _adjustment_update();
+      static void _complete_update();
       
     };
     

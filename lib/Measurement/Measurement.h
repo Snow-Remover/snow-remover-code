@@ -25,5 +25,6 @@
 // implementation is still separated from declaration, but is accessible
 // to the compiler.
 #include "Measurement/BaseAngle.tpp"
+#include "Measurement/Distance.tpp"
 
 #endif
