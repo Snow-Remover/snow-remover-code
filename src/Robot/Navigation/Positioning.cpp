@@ -59,12 +59,12 @@ namespace Robot
     // | 0x601B       0x6046
     // +----------------------x 216cm
     uint16_t Positioning::_anchors[_num_anchors] = {0x601B, 0x6046, 0x6032, 0x6035};
-    int32_t Positioning::_anchors_x[_num_anchors] = {0, 2160, 0, 2160};
-    int32_t Positioning::_anchors_y[_num_anchors] = {0, 0, 1510, 1510};
+    int32_t Positioning::_anchors_x[_num_anchors] = {0, 3300, 0, 3300};
+    int32_t Positioning::_anchors_y[_num_anchors] = {0, 0, 1500, 1500};
     int32_t Positioning::_heights[_num_anchors] = {0, 0, 0, 0};
     uint8_t Positioning::_algorithm = POZYX_POS_ALG_UWB_ONLY;
     uint8_t Positioning::_dimension = POZYX_2D;
-    int32_t Positioning::_height = 180;
+    int32_t Positioning::_height = 100;
     
     
     Position Positioning::_get()
@@ -98,7 +98,7 @@ namespace Robot
       //euler_angles.pitch
       Measurement::CoterminalAngle heading = Measurement::CoterminalAngle::from_degrees(euler_angles.heading);
       heading += Measurement::CoterminalAngle::from_degrees(90.0); // shield direction adjustment
-      //heading -= Measurement::CoterminalAngle::from_degrees(117.4); // coordinate space direction adjustment
+      heading -= Measurement::CoterminalAngle::from_degrees(176.0); // coordinate space direction adjustment
       Serial.print("heading: ");
       Serial.println(heading.degrees());
       return Position(x, y, heading);

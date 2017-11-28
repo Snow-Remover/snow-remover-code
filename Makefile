@@ -126,7 +126,7 @@ MONITOR_BAUDRATE  = 9600
 ifeq ($(CURRENT_OS), MAC)
     MONITOR_PORT      = /dev/tty.usbmodem1421
 else ifeq ($(CURRENT_OS), LINUX)
-    MONITOR_PORT      = /dev/ttyUSB*
+    MONITOR_PORT      = /dev/ttyACM*
 else
 endif
 

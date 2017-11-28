@@ -72,10 +72,10 @@ ARDUINO_DIR       = $(PROJECT_DIR)/arduino-ide/arduino-1.8.0
 ### For Arduino IDE 1.6.x
 ### Both BOARD_TAG and BOARD_SUB are needed. They must be set to the board you are currently using. (i.e BOARD_TAG = uno, mega, etc. & BOARD_SUB = atmega2560, etc.)
 ### Note: for the Arduino Uno, only BOARD_TAG is mandatory and BOARD_SUB can be equal to anything
-BOARD_TAG         = uno
-BOARD_SUB         = atmega328p
-#BOARD_TAG         = mega
-#BOARD_SUB         = atmega2560
+#BOARD_TAG         = uno
+#BOARD_SUB         = atmega328p
+BOARD_TAG         = mega
+BOARD_SUB         = atmega2560
 
 ### AVR_TOOLS_DIR
 ### Path to the AVR tools directory such as avr-gcc, avr-g++, etc.
@@ -126,7 +126,7 @@ MONITOR_BAUDRATE  = 9600
 ifeq ($(CURRENT_OS), MAC)
     MONITOR_PORT      = /dev/tty.usbmodem1421
 else ifeq ($(CURRENT_OS), LINUX)
-    MONITOR_PORT      = /dev/ttyUSB*
+    MONITOR_PORT      = /dev/ttyACM*
 else
 endif
 

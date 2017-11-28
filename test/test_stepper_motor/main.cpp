@@ -7,7 +7,7 @@
 #include "Measurement.h"
 
 AdafruitMotorShield::Shield motor_shield = AdafruitMotorShield::Shield();
-StepperMotor stepper_motor = StepperMotor(motor_shield.get_stepper_motor(1), 200, StepperMotor::StepType::Single);
+StepperMotor stepper_motor = StepperMotor(motor_shield.get_stepper_motor(2), 200, StepperMotor::StepType::Single);
 MessageBuffer messenger = MessageBuffer(Serial, 40);
 
 

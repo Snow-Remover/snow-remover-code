@@ -31,7 +31,7 @@ namespace Robot
       if (_tick_timer.is_complete())
       {
         Serial.println(">");
-        if (Vision::closest_obj() <= 100)
+        if (Vision::closest_obj() <= 30)
           _freeze();
         else
           _move();
@@ -45,13 +45,14 @@ namespace Robot
     //
     
     
-    PeriodicTimer Main::_tick_timer = PeriodicTimer(100, PeriodicTimer::Units::Milliseconds);
+    PeriodicTimer Main::_tick_timer = PeriodicTimer(250, PeriodicTimer::Units::Milliseconds);
     
     
     void Main::_freeze()
     {
       RotationCompensation::freeze();
       TranslationCompensation::freeze();
+      MotorMixer::update();
     }
     
     
