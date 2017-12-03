@@ -58,7 +58,7 @@ namespace Robot
     
     
     PeriodicTimer MotorMixer::_update_timer = PeriodicTimer(200, PeriodicTimer::Units::Milliseconds);
-    const float MotorMixer::_speed_scaling = 1;
+    const float MotorMixer::_speed_scaling = 0.5;
     float MotorMixer::_left_translation_input = 0.0;
     float MotorMixer::_right_translation_input = 0.0;
     float MotorMixer::_left_rotation_input = 0.0;

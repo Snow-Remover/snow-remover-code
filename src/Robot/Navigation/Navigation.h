@@ -5,6 +5,7 @@
 #include <Wire.h>
 #include <Pozyx.h>
 #include <Pozyx_definitions.h>
+#include <SoftwareSerial.h>
 
 #include "NativeExtensions.h"
 #include "Measurement.h"
@@ -12,6 +13,7 @@
 #include "Math.h"
 #include "Timer.h"
 #include "PeriodicTimer.h"
+#include "MessageBuffer.h"
 
 #include "../Hardware/Hardware.h"
 #include "../Vision.h"
@@ -22,6 +24,7 @@
 #include "Positioning.h"
 #include "RotationCompensation.h"
 #include "TranslationCompensation.h"
+#include "Plow.h"
 #include "Main.h"
 
 //#include "../Robot.h"

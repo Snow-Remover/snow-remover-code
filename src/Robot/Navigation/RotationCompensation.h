@@ -16,6 +16,7 @@ namespace Robot
       static void set_target(Measurement::CoterminalAngle heading);
       static void setup();
       static void tick();
+      static boolean is_facing_target();
       
       private:
       

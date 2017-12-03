@@ -12,6 +12,7 @@ namespace Robot
       
       public:
       
+      static void end();
       static boolean is_complete();
       static void set_target(Location location);
       static void setup();

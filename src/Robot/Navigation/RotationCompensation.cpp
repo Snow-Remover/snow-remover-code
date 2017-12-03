@@ -41,6 +41,13 @@ namespace Robot
     }
     
     
+    boolean RotationCompensation::is_facing_target()
+    {
+      Measurement::CoterminalAngle tolerance = Measurement::CoterminalAngle::from_degrees(30.0);
+      return _current_heading().is_between(_target_heading - tolerance, _target_heading + tolerance);
+    }
+    
+    
     //
     // private
     //

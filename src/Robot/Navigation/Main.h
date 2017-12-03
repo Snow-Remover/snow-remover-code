@@ -18,7 +18,13 @@ namespace Robot
       
       private:
       
-      static PeriodicTimer _update_timer;
+      static PeriodicTimer _navigation_timer;
+      static PeriodicTimer _position_timer;
+      static MessageBuffer _messenger;
+      static SoftwareSerial _serial;
+      
+      static void _update_position();
+      static void _update_navigation();
       
     };
     

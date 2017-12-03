@@ -1,7 +1,11 @@
 #include <Arduino.h>
 
+//need to be included here as well due to Arduino-mk bug
 #include <Pozyx.h>
 #include <Pozyx_definitions.h>
+#include <SoftwareSerial.h>
+#include <Servo.h>
+
 
 #include "Robot/Robot.h"
 
@@ -11,7 +15,7 @@
 void setup()
 {
   Serial.begin(9600);
-  Serial.println("begin...");
+  //Serial.println("begin...");
   Robot::Main::setup();
 
   Robot::Main::start();

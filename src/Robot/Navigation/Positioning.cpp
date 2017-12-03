@@ -37,7 +37,7 @@ namespace Robot
       delay(2000);
       
       _update_timer.reset();
-      _update();
+      _position = _get();
     }
     
     
@@ -68,10 +68,10 @@ namespace Robot
     int32_t Positioning::_anchors_x[_num_anchors] = {0, 1830, 0, 1830};
     int32_t Positioning::_anchors_y[_num_anchors] = {0, 0, 1210, 1210};
     int32_t Positioning::_heights[_num_anchors] = {0, 0, 0, 0};
-    //uint8_t Positioning::_algorithm = POZYX_POS_ALG_UWB_ONLY;
-    uint8_t Positioning::_algorithm = POZYX_POS_ALG_TRACKING;
-    //uint8_t Positioning::_dimension = POZYX_2D;
-    uint8_t Positioning::_dimension = POZYX_3D;
+    uint8_t Positioning::_algorithm = POZYX_POS_ALG_UWB_ONLY;
+    //uint8_t Positioning::_algorithm = POZYX_POS_ALG_TRACKING;
+    uint8_t Positioning::_dimension = POZYX_2D;
+    //uint8_t Positioning::_dimension = POZYX_3D;
     int32_t Positioning::_height = 100;
     
     
@@ -83,7 +83,7 @@ namespace Robot
       status = Pozyx.doPositioning(&position, _dimension, _height, _algorithm);
       if (status != POZYX_SUCCESS)
       {
-        Serial.println("ERROR: in Positioning::get() in Pozyx.doPositioning()");
+        Serial.println("ERROR: in Positioning::_get() in Pozyx.doPositioning()");
         //end();
       }
       //position.x
@@ -106,7 +106,7 @@ namespace Robot
       //euler_angles.pitch
       Measurement::CoterminalAngle heading = Measurement::CoterminalAngle::from_degrees(euler_angles.heading);
       heading += Measurement::CoterminalAngle::from_degrees(90.0); // shield direction adjustment
-      heading -= Measurement::CoterminalAngle::from_degrees(176.0); // coordinate space direction adjustment
+      heading -= Measurement::CoterminalAngle::from_degrees(90.0); // coordinate space direction adjustment
       Serial.print("heading: ");
       Serial.println(heading.degrees());
       return Position(x, y, heading);
@@ -130,20 +130,20 @@ namespace Robot
     
     void Positioning::_update()
     {
-      //Measurement::Distance old_x = _position.x();
-      //Measurement::Distance old_y = _position.y();
+      Measurement::Distance old_x = _position.x();
+      Measurement::Distance old_y = _position.y();
       
       Position new_position = _get();
-      //Measurement::Distance new_x = new_position.x();
-      //Measurement::Distance new_y = new_position.y();
-      //Measurement::CoterminalAngle new_heading = new_position.heading();
+      Measurement::Distance new_x = new_position.x();
+      Measurement::Distance new_y = new_position.y();
+      Measurement::CoterminalAngle new_heading = new_position.heading();
       
-      //Measurement::Distance filtered_x = old_x * 0.9 + new_x * 0.1;
-      //Measurement::Distance filtered_y = old_y * 0.9 + new_y * 0.1;
-      //Position filtered_position = Position(filtered_x, filtered_y, new_heading);
+      Measurement::Distance filtered_x = old_x * 0.9 + new_x * 0.1;
+      Measurement::Distance filtered_y = old_y * 0.9 + new_y * 0.1;
+      Position filtered_position = Position(filtered_x, filtered_y, new_heading);
       
-      //_position = filtered_position;
-      _position = new_position;
+      _position = filtered_position;
+      //_position = new_position;
     }
     
   }

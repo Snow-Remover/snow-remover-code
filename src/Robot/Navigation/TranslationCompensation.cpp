@@ -11,6 +11,12 @@ namespace Robot
     //
     
     
+    void TranslationCompensation::end()
+    {
+      _start_point = _finish_point;
+    }
+    
+    
     boolean TranslationCompensation::is_complete() // crossed finish line?
     {
       if (!_complete)
@@ -32,7 +38,8 @@ namespace Robot
     
     void TranslationCompensation::set_target(Location location)
     {
-      _start_point = _finish_point;
+      //_start_point = _finish_point;
+      _start_point = _robot_point();
       _finish_point = Geometry::Point(location.x().meters(), location.y().meters());
       _complete = false;
     }
@@ -42,8 +49,8 @@ namespace Robot
     {
       _start_point = _robot_point();
       //_start_point = Geometry::Point(0.0, 0.8);;
-      //_finish_point = _start_point;
-      _finish_point = Geometry::Point(0.8, 0.8);
+      _finish_point = _start_point;
+      //_finish_point = Geometry::Point(0.8, 0.8);
       _adjustment_timer.reset();
       _complete_timer.reset();
       _complete = false;
@@ -142,7 +149,7 @@ namespace Robot
     
     void TranslationCompensation::_complete_update()
     {
-      if (is_complete())
+      if (is_complete() || !RotationCompensation::is_facing_target())
       {
         MotorMixer::set_left_translation_input(0.0);
         MotorMixer::set_right_translation_input(0.0);
