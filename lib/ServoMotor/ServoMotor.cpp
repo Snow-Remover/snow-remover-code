@@ -16,8 +16,8 @@ ServoMotor::ServoMotor(int pin, Measurement::Angle inital_angle)
 
 void ServoMotor::setup()
 {
-  _var_speed_servo.attach(_pin);
-  _var_speed_servo.slowmove(_inital_angle.degrees(), 1);
+  _servo.attach(_pin);
+  _servo.write(round(_inital_angle.degrees()));
   
   _is_setup = true;
 }
@@ -28,7 +28,7 @@ void ServoMotor::turn_to_angle(Measurement::Angle angle)
 	if (!_is_setup)
 	  return;
   
-  _var_speed_servo.write(angle.degrees());
+  _servo.write(round(angle.degrees()));
 }
 
 

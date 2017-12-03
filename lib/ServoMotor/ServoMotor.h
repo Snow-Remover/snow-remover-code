@@ -8,8 +8,7 @@
  */
 
 #include <Arduino.h>
-
-#include "VarSpeedServo.h" 
+#include <Servo.h>
 #include "Measurement.h"
 
 
@@ -28,7 +27,7 @@ class ServoMotor
   Measurement::Angle _inital_angle;
   boolean _is_setup;
   int _pin;
-  VarSpeedServo _var_speed_servo;
+  Servo _servo;
   
 };
 
