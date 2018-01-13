@@ -1,6 +1,9 @@
 #ifndef _ROBOT_NAVIGATION_MOTOR_MIXER_H_
 #define _ROBOT_NAVIGATION_MOTOR_MIXER_H_
 
+// two of the Navigation tasks input the motor they need
+//  this task will average these requests and output the final speed
+//  to the Hardware component
 
 namespace Robot
 {

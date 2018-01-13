@@ -1,6 +1,9 @@
 #ifndef _ROBOT_NAVIGATION_TRANSLATION_COMPENSATION_H_
 #define _ROBOT_NAVIGATION_TRANSLATION_COMPENSATION_H_
 
+// one of two tasks that will compare the desired and actual position
+//   and adjust the motors to compensate for the error
+// this one will propel the robot forward until it reaches the desired position
 
 namespace Robot
 {

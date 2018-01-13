@@ -1,6 +1,8 @@
 #ifndef _ROBOT_NAVIGATION_LOCATION_H_
 #define _ROBOT_NAVIGATION_LOCATION_H_
 
+// 2D location
+// does not include orientation
 
 namespace Robot
 {

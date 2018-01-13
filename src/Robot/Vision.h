@@ -2,6 +2,11 @@
 #define _ROBOT_VISION_H_
 
 
+// handles the vision component of the robot
+// currently only offers 1D sight but ideally would be expanded to output
+//   more detailed 3D data on the surrounding objects
+// used by the Navigation component to know when to stop the robot
+
 namespace Robot
 {
 

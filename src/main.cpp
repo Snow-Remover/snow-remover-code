@@ -1,3 +1,5 @@
+// the code had been structured to keep the main file clean
+
 #include <Arduino.h>
 
 //need to be included here as well due to Arduino-mk bug
@@ -11,13 +13,11 @@
 
 
 // setup every task (eg. pin modes)
-// some return false to indicate an error
+// some will print out error and stop the program
 void setup()
 {
   Serial.begin(9600);
-  //Serial.println("begin...");
   Robot::Main::setup();
-
   Robot::Main::start();
 }
 

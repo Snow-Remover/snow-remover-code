@@ -1,6 +1,9 @@
 #ifndef _ROBOT_NAVIGATION_ROTATION_COMPENSATION_H_
 #define _ROBOT_NAVIGATION_ROTATION_COMPENSATION_H_
 
+// one of two tasks that will compare the desired and actual position
+//   and adjust the motors to compensate for the error
+// this one will try to keep the robot facing the correct direction
 
 namespace Robot
 {

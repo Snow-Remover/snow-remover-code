@@ -1,6 +1,9 @@
 #ifndef _ROBOT_NAVIGATION_NAVIGATION_H_
 #define _ROBOT_NAVIGATION_NAVIGATION_H_
 
+// this header is only used to include the necessity headers to compile
+//   code in this directory
+
 #include <Arduino.h>
 #include <Wire.h>
 #include <Pozyx.h>

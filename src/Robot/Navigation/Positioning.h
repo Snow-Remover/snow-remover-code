@@ -1,6 +1,7 @@
 #ifndef _ROBOT_NAVIGATION_POSITIONING_H_
 #define _ROBOT_NAVIGATION_POSITIONING_H_
 
+// call get() on this class to obtain the robots current Position
 
 namespace Robot
 {

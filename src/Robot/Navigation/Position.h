@@ -1,6 +1,7 @@
 #ifndef _ROBOT_NAVIGATION_POSITION_H_
 #define _ROBOT_NAVIGATION_POSITION_H_
 
+// Position includes both Location (2D) and orientation (2D)
 
 namespace Robot
 {

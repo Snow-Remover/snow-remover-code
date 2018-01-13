@@ -1,0 +1,139 @@
+### For detailled explanations about all the avalaible options,
+### please refer to https://github.com/sudar/Arduino-Makefile/blob/master/arduino-mk-vars.md
+
+### don't touch this
+CURRENT_DIR       = $(shell basename $(CURDIR))
+MAKEFILE_DIR     := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
+
+### Find OS
+## Works for Windows, Linux and Mac
+ifeq ($(OS),Windows_NT)
+    CURRENT_OS = WINDOWS
+else
+    UNAME_S := $(shell uname -s)
+    ifeq ($(UNAME_S),Linux)
+        CURRENT_OS = LINUX
+    endif
+    ifeq ($(UNAME_S),Darwin)
+        CURRENT_OS = MAC
+    endif
+endif
+
+#ARDUINO_LIBS = Ethernet SPI
+
+### PROJECT_DIR
+### This is the path to where you have created/cloned your project
+PROJECT_DIR       = $(MAKEFILE_DIR)/../../
+
+
+### SRC_DIR
+## change this if you are working on a test
+SRC_DIR       = $(PROJECT_DIR)/test/test_pozyx/
+
+
+### define function to recursively search for files
+## eg To find all the c files in the current directory:
+##    $(call rwildcard, , *.c)
+## eg To find all the .c and .h files in src:
+##    $(call rwildcard, src/, *.c *.h)
+## for more details see https://stackoverflow.com/questions/2483182/recursive-wildcards-in-gnu-make
+rwildcard = $(foreach d,$(wildcard $1*),$(call rwildcard,$d/,$2) $(filter $(subst *,%,$2),$d))
+
+### find all .cpp files so we can compile them, even if we dont use them all
+#LOCAL_C_SRCS    = $(wildcard src/*.c)
+LOCAL_CPP_SRCS  = $(call rwildcard, $(PROJECT_DIR)/lib/, *.cpp)
+LOCAL_CPP_SRCS  += $(call rwildcard, $(SRC_DIR)/, *.cpp)
+#LOCAL_CC_SRCS   = $(wildcard src/*.cc)
+#LOCAL_PDE_SRCS  = $(wildcard src/*.pde)
+#LOCAL_INO_SRCS  = $(wildcard src/*.ino)
+#LOCAL_AS_SRCS   = $(wildcard src/*.S)
+
+### AVR_GCC_VERSION
+### Check if the version is equal or higher than 4.9
+AVR_GCC_VERSION  := $(shell expr `avr-gcc -dumpversion | cut -f1` \>= 4.9)
+
+### ARDMK_DIR
+### Path to the Arduino-Makefile directory.
+ARDMK_DIR         = $(PROJECT_DIR)/arduino-mk
+
+### ARDUINO_DIR
+### Path to the Arduino application and ressources directory.
+ARDUINO_DIR       = $(PROJECT_DIR)/arduino-ide/arduino-1.8.0
+
+### USER_LIB_PATH
+### Path to where the your project's libraries are stored.
+# does not work so ill just comment it out
+#USER_LIB_PATH     :=  $(realpath $(PROJECT_DIR)/lib)
+
+### BOARD_TAG & BOARD_SUB
+### For Arduino IDE 1.0.x
+### Only BOARD_TAG is needed. It must be set to the board you are currently using. (i.e uno, mega2560, etc.)
+# BOARD_TAG         = mega2560
+### For Arduino IDE 1.6.x
+### Both BOARD_TAG and BOARD_SUB are needed. They must be set to the board you are currently using. (i.e BOARD_TAG = uno, mega, etc. & BOARD_SUB = atmega2560, etc.)
+### Note: for the Arduino Uno, only BOARD_TAG is mandatory and BOARD_SUB can be equal to anything
+#BOARD_TAG         = uno
+#BOARD_SUB         = atmega328p
+BOARD_TAG         = mega
+BOARD_SUB         = atmega2560
+
+### AVR_TOOLS_DIR
+### Path to the AVR tools directory such as avr-gcc, avr-g++, etc.
+ifeq ($(CURRENT_OS), MAC)
+    AVR_TOOLS_DIR     = /usr/local
+else ifeq ($(CURRENT_OS), LINUX)
+    AVR_TOOLS_DIR     = /usr
+else
+endif
+
+### AVRDDUDE
+### Path to avrdude directory.
+ifeq ($(CURRENT_OS), MAC)
+    AVRDDUDE          = /usr/local/bin/avrdude
+    AVRDUDE_CONF      = /usr/local/etc/avrdude.conf
+else ifeq ($(CURRENT_OS), LINUX)
+    AVRDDUDE          = /usr/bin/avrdude
+    AVRDUDE_CONF      = /etc/avrdude.conf
+else
+endif
+
+### CFLAGS_STD
+CFLAGS_STD        = -std=gnu11
+
+### CXXFLAGS_STD
+CXXFLAGS_STD      = -std=gnu++11
+# The root folders of each library directory have the header files that our code may include
+# Here, we append each of the libraries' root directory to the search path of the compiler
+libraries := $(wildcard $(PROJECT_DIR)/lib/*/)
+CXXFLAGS_STD += $(foreach dir,$(libraries), -I$(dir))
+#CXXFLAGS_STD += -ffunction-sections -Wl,-gc-sections
+
+### CPPFLAGS
+### Flags you might want to set for debugging purpose. Comment to stop.
+CXXFLAGS         = -Wall -Wextra
+
+### If avr-gcc -v is higher than 4.9, activate coloring of the output
+ifeq "$(AVR_GCC_VERSION)" "1"
+    CXXFLAGS += -fdiagnostics-color
+endif
+
+### MONITOR_BAUDRATE
+### It must be set to Serial baudrate value you are using.
+MONITOR_BAUDRATE  = 9600
+
+### MONITOR
+### The port your board is connected to. Using an '*' tries all the ports and finds the right one.
+ifeq ($(CURRENT_OS), MAC)
+    MONITOR_PORT      = /dev/tty.usbmodem1421
+else ifeq ($(CURRENT_OS), LINUX)
+    MONITOR_PORT      = /dev/ttyACM*
+else
+endif
+
+### OBJDIR
+### This is were you put the binaries you just compile using 'make'
+OBJDIR            = $(PROJECT_DIR)/bin/$(CURRENT_DIR)/$(BOARD_TAG)
+
+### path to Arduino.mk, inside the ARDMK_DIR, don't touch.
+include $(ARDMK_DIR)/Arduino.mk
+
